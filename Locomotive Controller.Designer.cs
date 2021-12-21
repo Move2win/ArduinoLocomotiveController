@@ -44,6 +44,16 @@ namespace ArduinoLocomotiveController
             this.AutoBrake = new System.Windows.Forms.TrackBar();
             this.IndeBrake = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.B1 = new System.Windows.Forms.Panel();
+            this.B2 = new System.Windows.Forms.Panel();
+            this.P5 = new System.Windows.Forms.Panel();
+            this.P4 = new System.Windows.Forms.Panel();
+            this.B3 = new System.Windows.Forms.Panel();
+            this.P3 = new System.Windows.Forms.Panel();
+            this.P2 = new System.Windows.Forms.Panel();
+            this.B4 = new System.Windows.Forms.Panel();
+            this.P1 = new System.Windows.Forms.Panel();
+            this.B5 = new System.Windows.Forms.Panel();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label9 = new System.Windows.Forms.Label();
@@ -66,16 +76,8 @@ namespace ArduinoLocomotiveController
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.P1 = new System.Windows.Forms.Panel();
-            this.P2 = new System.Windows.Forms.Panel();
-            this.P3 = new System.Windows.Forms.Panel();
-            this.P4 = new System.Windows.Forms.Panel();
-            this.P5 = new System.Windows.Forms.Panel();
-            this.B1 = new System.Windows.Forms.Panel();
-            this.B2 = new System.Windows.Forms.Panel();
-            this.B3 = new System.Windows.Forms.Panel();
-            this.B4 = new System.Windows.Forms.Panel();
-            this.B5 = new System.Windows.Forms.Panel();
+            this.CheckNow = new System.Windows.Forms.Label();
+            this.SCC = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.AutoBrake)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndeBrake)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -86,30 +88,35 @@ namespace ArduinoLocomotiveController
             // 
             // AutoBrake
             // 
+            this.AutoBrake.BackColor = System.Drawing.SystemColors.Control;
             this.AutoBrake.LargeChange = 0;
             this.AutoBrake.Location = new System.Drawing.Point(172, 66);
             this.AutoBrake.Maximum = 2;
             this.AutoBrake.Name = "AutoBrake";
             this.AutoBrake.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.AutoBrake.Size = new System.Drawing.Size(45, 341);
-            this.AutoBrake.SmallChange = 0;
             this.AutoBrake.TabIndex = 2;
             this.AutoBrake.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.AutoBrake.Enter += new System.EventHandler(this.AutoBrake_Enter);
+            this.AutoBrake.Leave += new System.EventHandler(this.AutoBrake_Leave);
             // 
             // IndeBrake
             // 
+            this.IndeBrake.BackColor = System.Drawing.SystemColors.Control;
             this.IndeBrake.LargeChange = 0;
             this.IndeBrake.Location = new System.Drawing.Point(239, 66);
             this.IndeBrake.Maximum = 2;
             this.IndeBrake.Name = "IndeBrake";
             this.IndeBrake.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.IndeBrake.Size = new System.Drawing.Size(45, 341);
-            this.IndeBrake.SmallChange = 0;
             this.IndeBrake.TabIndex = 3;
             this.IndeBrake.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.IndeBrake.Enter += new System.EventHandler(this.IndeBrake_Enter);
+            this.IndeBrake.Leave += new System.EventHandler(this.IndeBrake_Leave);
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.groupBox1.Controls.Add(this.B1);
             this.groupBox1.Controls.Add(this.B2);
             this.groupBox1.Controls.Add(this.P5);
@@ -141,9 +148,119 @@ namespace ArduinoLocomotiveController
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Power Combined";
             // 
+            // B1
+            // 
+            this.B1.BackColor = System.Drawing.Color.Gold;
+            this.B1.Location = new System.Drawing.Point(256, 238);
+            this.B1.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.B1.Name = "B1";
+            this.B1.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.B1.Size = new System.Drawing.Size(20, 32);
+            this.B1.TabIndex = 9;
+            this.B1.Visible = false;
+            // 
+            // B2
+            // 
+            this.B2.BackColor = System.Drawing.Color.Gold;
+            this.B2.Location = new System.Drawing.Point(256, 270);
+            this.B2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.B2.Name = "B2";
+            this.B2.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.B2.Size = new System.Drawing.Size(20, 32);
+            this.B2.TabIndex = 10;
+            this.B2.Visible = false;
+            // 
+            // P5
+            // 
+            this.P5.BackColor = System.Drawing.Color.LimeGreen;
+            this.P5.Location = new System.Drawing.Point(256, 75);
+            this.P5.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.P5.Name = "P5";
+            this.P5.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.P5.Size = new System.Drawing.Size(20, 32);
+            this.P5.TabIndex = 7;
+            this.P5.Visible = false;
+            // 
+            // P4
+            // 
+            this.P4.BackColor = System.Drawing.Color.LimeGreen;
+            this.P4.Location = new System.Drawing.Point(256, 107);
+            this.P4.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.P4.Name = "P4";
+            this.P4.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.P4.Size = new System.Drawing.Size(20, 32);
+            this.P4.TabIndex = 7;
+            this.P4.Visible = false;
+            // 
+            // B3
+            // 
+            this.B3.BackColor = System.Drawing.Color.Gold;
+            this.B3.Location = new System.Drawing.Point(256, 302);
+            this.B3.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.B3.Name = "B3";
+            this.B3.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.B3.Size = new System.Drawing.Size(20, 32);
+            this.B3.TabIndex = 11;
+            this.B3.Visible = false;
+            // 
+            // P3
+            // 
+            this.P3.BackColor = System.Drawing.Color.LimeGreen;
+            this.P3.Location = new System.Drawing.Point(256, 139);
+            this.P3.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.P3.Name = "P3";
+            this.P3.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.P3.Size = new System.Drawing.Size(20, 32);
+            this.P3.TabIndex = 7;
+            this.P3.Visible = false;
+            // 
+            // P2
+            // 
+            this.P2.BackColor = System.Drawing.Color.LimeGreen;
+            this.P2.Location = new System.Drawing.Point(256, 171);
+            this.P2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.P2.Name = "P2";
+            this.P2.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.P2.Size = new System.Drawing.Size(20, 32);
+            this.P2.TabIndex = 7;
+            this.P2.Visible = false;
+            // 
+            // B4
+            // 
+            this.B4.BackColor = System.Drawing.Color.Gold;
+            this.B4.Location = new System.Drawing.Point(256, 334);
+            this.B4.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.B4.Name = "B4";
+            this.B4.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.B4.Size = new System.Drawing.Size(20, 32);
+            this.B4.TabIndex = 12;
+            this.B4.Visible = false;
+            // 
+            // P1
+            // 
+            this.P1.BackColor = System.Drawing.Color.LimeGreen;
+            this.P1.Location = new System.Drawing.Point(256, 203);
+            this.P1.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.P1.Name = "P1";
+            this.P1.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.P1.Size = new System.Drawing.Size(20, 32);
+            this.P1.TabIndex = 6;
+            this.P1.Visible = false;
+            // 
+            // B5
+            // 
+            this.B5.BackColor = System.Drawing.Color.Gold;
+            this.B5.Location = new System.Drawing.Point(256, 366);
+            this.B5.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.B5.Name = "B5";
+            this.B5.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.B5.Size = new System.Drawing.Size(20, 32);
+            this.B5.TabIndex = 8;
+            this.B5.Visible = false;
+            // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(257, 236);
+            this.progressBar2.Location = new System.Drawing.Point(254, 236);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(24, 164);
             this.progressBar2.Step = 1;
@@ -151,7 +268,7 @@ namespace ArduinoLocomotiveController
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(257, 73);
+            this.progressBar1.Location = new System.Drawing.Point(254, 73);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(24, 164);
             this.progressBar1.Step = 1;
@@ -251,6 +368,7 @@ namespace ArduinoLocomotiveController
             // 
             // Direction
             // 
+            this.Direction.BackColor = System.Drawing.SystemColors.Control;
             this.Direction.LargeChange = 0;
             this.Direction.Location = new System.Drawing.Point(92, 66);
             this.Direction.Maximum = 1;
@@ -260,9 +378,12 @@ namespace ArduinoLocomotiveController
             this.Direction.Size = new System.Drawing.Size(45, 341);
             this.Direction.TabIndex = 0;
             this.Direction.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.Direction.Enter += new System.EventHandler(this.Direction_Enter);
+            this.Direction.Leave += new System.EventHandler(this.Direction_Leave);
             // 
             // Power
             // 
+            this.Power.BackColor = System.Drawing.SystemColors.Control;
             this.Power.LargeChange = 0;
             this.Power.Location = new System.Drawing.Point(287, 66);
             this.Power.Maximum = 5;
@@ -273,9 +394,12 @@ namespace ArduinoLocomotiveController
             this.Power.TabIndex = 1;
             this.Power.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.Power.Scroll += new System.EventHandler(this.Power_Scroll);
+            this.Power.Enter += new System.EventHandler(this.Power_Enter);
+            this.Power.Leave += new System.EventHandler(this.Power_Leave);
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.label15);
@@ -287,12 +411,12 @@ namespace ArduinoLocomotiveController
             this.groupBox2.Controls.Add(this.IndeBrake);
             this.groupBox2.Controls.Add(this.AutoBrake);
             this.groupBox2.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(728, 217);
+            this.groupBox2.Location = new System.Drawing.Point(745, 217);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(447, 436);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Brakes";
+            this.groupBox2.Text = "Brake System";
             // 
             // label17
             // 
@@ -376,123 +500,36 @@ namespace ArduinoLocomotiveController
             this.label10.TabIndex = 4;
             this.label10.Text = "Release";
             // 
-            // P1
+            // CheckNow
             // 
-            this.P1.BackColor = System.Drawing.Color.LimeGreen;
-            this.P1.Location = new System.Drawing.Point(259, 203);
-            this.P1.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.P1.Name = "P1";
-            this.P1.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.P1.Size = new System.Drawing.Size(20, 32);
-            this.P1.TabIndex = 6;
-            this.P1.Visible = false;
+            this.CheckNow.AutoSize = true;
+            this.CheckNow.ForeColor = System.Drawing.SystemColors.Control;
+            this.CheckNow.Location = new System.Drawing.Point(1262, 690);
+            this.CheckNow.Name = "CheckNow";
+            this.CheckNow.Size = new System.Drawing.Size(18, 17);
+            this.CheckNow.TabIndex = 8;
+            this.CheckNow.Text = "A";
             // 
-            // P2
+            // SCC
             // 
-            this.P2.BackColor = System.Drawing.Color.LimeGreen;
-            this.P2.Location = new System.Drawing.Point(259, 171);
-            this.P2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.P2.Name = "P2";
-            this.P2.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.P2.Size = new System.Drawing.Size(20, 32);
-            this.P2.TabIndex = 7;
-            this.P2.Visible = false;
-            // 
-            // P3
-            // 
-            this.P3.BackColor = System.Drawing.Color.LimeGreen;
-            this.P3.Location = new System.Drawing.Point(259, 139);
-            this.P3.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.P3.Name = "P3";
-            this.P3.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.P3.Size = new System.Drawing.Size(20, 32);
-            this.P3.TabIndex = 7;
-            this.P3.Visible = false;
-            // 
-            // P4
-            // 
-            this.P4.BackColor = System.Drawing.Color.LimeGreen;
-            this.P4.Location = new System.Drawing.Point(259, 107);
-            this.P4.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.P4.Name = "P4";
-            this.P4.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.P4.Size = new System.Drawing.Size(20, 32);
-            this.P4.TabIndex = 7;
-            this.P4.Visible = false;
-            // 
-            // P5
-            // 
-            this.P5.BackColor = System.Drawing.Color.LimeGreen;
-            this.P5.Location = new System.Drawing.Point(259, 75);
-            this.P5.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.P5.Name = "P5";
-            this.P5.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.P5.Size = new System.Drawing.Size(20, 32);
-            this.P5.TabIndex = 7;
-            this.P5.Visible = false;
-            // 
-            // B1
-            // 
-            this.B1.BackColor = System.Drawing.Color.Gold;
-            this.B1.Location = new System.Drawing.Point(259, 238);
-            this.B1.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.B1.Name = "B1";
-            this.B1.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.B1.Size = new System.Drawing.Size(20, 32);
-            this.B1.TabIndex = 9;
-            this.B1.Visible = false;
-            // 
-            // B2
-            // 
-            this.B2.BackColor = System.Drawing.Color.Gold;
-            this.B2.Location = new System.Drawing.Point(259, 270);
-            this.B2.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.B2.Name = "B2";
-            this.B2.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.B2.Size = new System.Drawing.Size(20, 32);
-            this.B2.TabIndex = 10;
-            this.B2.Visible = false;
-            // 
-            // B3
-            // 
-            this.B3.BackColor = System.Drawing.Color.Gold;
-            this.B3.Location = new System.Drawing.Point(259, 302);
-            this.B3.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.B3.Name = "B3";
-            this.B3.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.B3.Size = new System.Drawing.Size(20, 32);
-            this.B3.TabIndex = 11;
-            this.B3.Visible = false;
-            // 
-            // B4
-            // 
-            this.B4.BackColor = System.Drawing.Color.Gold;
-            this.B4.Location = new System.Drawing.Point(259, 334);
-            this.B4.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.B4.Name = "B4";
-            this.B4.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.B4.Size = new System.Drawing.Size(20, 32);
-            this.B4.TabIndex = 12;
-            this.B4.Visible = false;
-            // 
-            // B5
-            // 
-            this.B5.BackColor = System.Drawing.Color.Gold;
-            this.B5.Location = new System.Drawing.Point(259, 366);
-            this.B5.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.B5.Name = "B5";
-            this.B5.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.B5.Size = new System.Drawing.Size(20, 32);
-            this.B5.TabIndex = 8;
-            this.B5.Visible = false;
+            this.SCC.AutoSize = true;
+            this.SCC.Font = new System.Drawing.Font("等线", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SCC.Location = new System.Drawing.Point(500, 672);
+            this.SCC.Name = "SCC";
+            this.SCC.Size = new System.Drawing.Size(296, 33);
+            this.SCC.TabIndex = 9;
+            this.SCC.Text = "Self Check Complete";
+            this.SCC.Visible = false;
             // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1284, 711);
+            this.Controls.Add(this.SCC);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.CheckNow);
             this.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -500,6 +537,7 @@ namespace ArduinoLocomotiveController
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Locomotive Controller";
             this.Load += new System.EventHandler(this.ControlPanel_Load);
+            this.Shown += new System.EventHandler(this.ControlPanel_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.AutoBrake)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndeBrake)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -509,15 +547,18 @@ namespace ArduinoLocomotiveController
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+        private TrackBarNoBorder Direction;
+        private TrackBarNoBorder Power;
         private System.Windows.Forms.TrackBar AutoBrake;
         private System.Windows.Forms.TrackBar IndeBrake;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -534,8 +575,6 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
-        private TrackBarNoBorder Direction;
-        private TrackBarNoBorder Power;
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Panel P1;
@@ -548,6 +587,8 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.Panel B3;
         private System.Windows.Forms.Panel B4;
         private System.Windows.Forms.Panel B5;
+        private System.Windows.Forms.Label CheckNow;
+        private System.Windows.Forms.Label SCC;
     }
 }
 

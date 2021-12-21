@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ArduinoLocomotiveController
@@ -17,22 +17,73 @@ namespace ArduinoLocomotiveController
             InitializeComponent();
         }
 
-        //class CustomTrackBar : System.Windows.Forms.TrackBar
-        //{
-        //    protected override bool ShowFocusCues
-        //    {
-        //        get
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //}
-
         private void ControlPanel_Load(object sender, EventArgs e)
         {
             bool ReverserLock = false;
             bool PantagraphState = false;
+            
         }
+
+        private void ControlPanel_Shown(object sender, EventArgs e)
+        {
+            Application.DoEvents();
+            Direction.Focus();
+            Thread.Sleep(500);
+            Power.Focus();
+            Thread.Sleep(500);
+            AutoBrake.Focus();
+            Thread.Sleep(500);
+            IndeBrake.Focus();
+            Thread.Sleep(500);
+            Direction.Focus();
+            //SCC.Visible = true;
+            //Thread.Sleep(1000);
+            //SCC.Visible = false;
+        }
+
+        #region Focus Indicator via Color
+
+        private void Direction_Enter(object sender, EventArgs e)
+        {
+            Direction.BackColor = Color.DarkOrange;
+        }
+
+        private void Direction_Leave(object sender, EventArgs e)
+        {
+            Direction.BackColor = SystemColors.Control;
+        }
+
+        private void Power_Enter(object sender, EventArgs e)
+        {
+            Power.BackColor = Color.SlateBlue;
+        }
+
+        private void Power_Leave(object sender, EventArgs e)
+        {
+            Power.BackColor = SystemColors.Control;
+        }
+
+        private void AutoBrake_Enter(object sender, EventArgs e)
+        {
+            AutoBrake.BackColor = Color.OrangeRed;
+        }
+
+        private void AutoBrake_Leave(object sender, EventArgs e)
+        {
+            AutoBrake.BackColor = SystemColors.Control;
+        }
+
+        private void IndeBrake_Enter(object sender, EventArgs e)
+        {
+            IndeBrake.BackColor = Color.DarkOrchid;
+        }
+
+        private void IndeBrake_Leave(object sender, EventArgs e)
+        {
+            IndeBrake.BackColor = SystemColors.Control;
+        }
+
+        #endregion
 
         private void Power_Scroll(object sender, EventArgs e)
         {
@@ -122,5 +173,18 @@ namespace ArduinoLocomotiveController
                     break;
             }
         }
+
+        //private void CheckNow_Paint(object sender, PaintEventArgs e)
+        //{
+        //    Direction.Focus();
+        //    Thread.Sleep(500);
+        //    Power.Focus();
+        //    Thread.Sleep(500);
+        //    AutoBrake.Focus();
+        //    Thread.Sleep(500);
+        //    IndeBrake.Focus();
+        //    Thread.Sleep(500);
+        //    Direction.Focus();
+        //}
     }
 }
