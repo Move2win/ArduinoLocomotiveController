@@ -66,6 +66,9 @@ namespace ArduinoLocomotiveController
             AutoBrake.BackColor = SystemColors.Control;
             IndeBrake.BackColor = SystemColors.Control;
             SCing_Hide();
+            PowerNum.Text = "0";
+            NeutralL.BackColor = NeutralR.BackColor = Color.Yellow;
+            IDLE.BackColor = Color.SpringGreen;
             Application.DoEvents();
             Direction_Enter(sender, e);
         }
@@ -99,7 +102,6 @@ namespace ArduinoLocomotiveController
         private void Power_Enter(object sender, EventArgs e)
         {
             PowerActivibility.ForeColor = Color.LightSeaGreen;
-            //SSC_Display();
         }
 
         private void Power_Leave(object sender, EventArgs e)
@@ -128,6 +130,40 @@ namespace ArduinoLocomotiveController
         }
 
         #endregion
+
+        private void Direction_Scroll(object sender, EventArgs e)
+         {
+            switch (Direction.Value)
+            {
+                case 1:
+                    Direction.BackColor = Color.DarkOrange;
+                    ForwardL.BackColor = Color.Yellow;
+                    ForwardR.BackColor = Color.Yellow;
+                    NeutralL.BackColor = SystemColors.ControlLight;
+                    NeutralR.BackColor = SystemColors.ControlLight;
+                    ReverseL.BackColor = SystemColors.ControlLight;
+                    ReverseR.BackColor = SystemColors.ControlLight;
+                    break;
+                case 0:
+                    Direction.BackColor = SystemColors.Control;
+                    ForwardL.BackColor = SystemColors.ControlLight;
+                    ForwardR.BackColor = SystemColors.ControlLight;
+                    NeutralL.BackColor = Color.Yellow;
+                    NeutralR.BackColor = Color.Yellow;
+                    ReverseL.BackColor = SystemColors.ControlLight;
+                    ReverseR.BackColor = SystemColors.ControlLight;
+                    break;
+                case -1:
+                    Direction.BackColor = Color.DarkOrange;
+                    ForwardL.BackColor = SystemColors.ControlLight;
+                    ForwardR.BackColor =SystemColors.ControlLight;
+                    NeutralL.BackColor = SystemColors.ControlLight;
+                    NeutralR.BackColor = SystemColors.ControlLight;
+                    ReverseL.BackColor = Color.Yellow;
+                    ReverseR.BackColor = Color.Yellow;
+                    break;
+            }
+         }
 
         private void Power_Scroll(object sender, EventArgs e)
         {
@@ -216,7 +252,67 @@ namespace ArduinoLocomotiveController
                     B5.Show();
                     break;
             }
+
+            #region Power底色
+
+            if (Power.Value == 5)
+            {
+                FULLTHROTTLE.BackColor = Color.Red;
+                FULLTHROTTLE.ForeColor = Color.LimeGreen;
+                IDLE.BackColor = SystemColors.ControlLight;
+                DYNAMICBRAKE.BackColor = SystemColors.ControlLight;
+                DYNAMICBRAKE.ForeColor = Color.Black;
+            }
+            else if (Power.Value > 0 & Power.Value < 5)
+            {
+                FULLTHROTTLE.BackColor = SystemColors.ControlLight;
+                FULLTHROTTLE.ForeColor = Color.LimeGreen;
+                IDLE.BackColor = SystemColors.ControlLight;
+                DYNAMICBRAKE.BackColor = SystemColors.ControlLight;
+                DYNAMICBRAKE.ForeColor = Color.Black;
+            }
+            else if (Power.Value == 0)
+            {
+                FULLTHROTTLE.BackColor = SystemColors.ControlLight;
+                FULLTHROTTLE.ForeColor = Color.Black;
+                IDLE.BackColor = Color.SpringGreen;
+                DYNAMICBRAKE.BackColor = SystemColors.ControlLight;
+                DYNAMICBRAKE.ForeColor = Color.Black;
+            }
+            else if (Power.Value < 0 & Power.Value > -5)
+            {
+                FULLTHROTTLE.BackColor = SystemColors.ControlLight;
+                FULLTHROTTLE.ForeColor = Color.Black;
+                IDLE.BackColor = SystemColors.ControlLight;
+                DYNAMICBRAKE.BackColor = SystemColors.ControlLight;
+                DYNAMICBRAKE.ForeColor = Color.DarkOrange;
+            }
+            else if (Power.Value == -5)
+            {
+                FULLTHROTTLE.BackColor = SystemColors.ControlLight;
+                FULLTHROTTLE.ForeColor = Color.Black;
+                IDLE.BackColor = SystemColors.ControlLight;
+                DYNAMICBRAKE.BackColor = Color.Red;
+                DYNAMICBRAKE.ForeColor = Color.DarkOrange;
+            }
+
+            #endregion
+
+            switch (Power.Value)
+            {
+                case var expression when Power.Value > 0:
+                    break;
+            }
         }
 
+        private void AutoBrake_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void IndeBrake_Scroll(object sender, EventArgs e)
+        {
+
+        }
     }
 }
