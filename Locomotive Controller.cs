@@ -64,26 +64,15 @@ namespace ArduinoLocomotiveController
             AutoBrake.BackColor = SystemColors.Control;
             IndeBrake.BackColor = SystemColors.Control;
             DirectionActivibility.ForeColor = Color.LightSeaGreen;
-            //Direction.Focus();
-            //Thread.Sleep(300);
-            //Power.Focus();
-            //Thread.Sleep(300);
-            //AutoBrake.Focus();
-            //Thread.Sleep(300);
-            //IndeBrake.Focus();
-            //Thread.Sleep(300);
-            //Direction.Focus();
-            //Thread.Sleep(300);
-            //Power.Focus();
-            //Thread.Sleep(300);
-            //AutoBrake.Focus();
-            //Thread.Sleep(300);
-            //IndeBrake.Focus();
-            //Thread.Sleep(300);
-            //Direction.Focus();
-            ////SCC.Visible = true;
-            ////Thread.Sleep(1000);
-            ////SCC.Visible = false;
+            SSC_Display();
+        }
+
+        private void SSC_Display()
+        {
+            SCing.Visible = false;
+            SCC.Visible = true;
+            Thread.Sleep(500);
+            SCC.Visible = false;
         }
 
         #region Focus Indicator via TextColor
