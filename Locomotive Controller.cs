@@ -26,61 +26,106 @@ namespace ArduinoLocomotiveController
 
         private void ControlPanel_Shown(object sender, EventArgs e)
         {
+            DirectionActivibility.ForeColor = Color.Black;
             Application.DoEvents();
-            Direction.Focus();
             Thread.Sleep(500);
-            Power.Focus();
+            Direction.BackColor = Color.DarkOrange;
+            Thread.Sleep(300);
+            Direction.BackColor = SystemColors.Control;
+            Power.BackColor = Color.OliveDrab;
+            Thread.Sleep(300);
+            Power.BackColor = SystemColors.Control;
+            AutoBrake.BackColor = Color.Red;
+            Thread.Sleep(300);
+            AutoBrake.BackColor = SystemColors.Control;
+            IndeBrake.BackColor = Color.DarkMagenta;
+            Thread.Sleep(300);
+            IndeBrake.BackColor = SystemColors.Control;
+            Direction.BackColor = Color.DarkOrange;
+            Thread.Sleep(300);
+            Direction.BackColor = SystemColors.Control;
+            Power.BackColor = Color.OliveDrab;
+            Thread.Sleep(300);
+            Power.BackColor = SystemColors.Control;
+            AutoBrake.BackColor = Color.Red;
+            Thread.Sleep(300);
+            AutoBrake.BackColor = SystemColors.Control;
+            IndeBrake.BackColor = Color.DarkMagenta;
+            Thread.Sleep(300);
+            IndeBrake.BackColor = SystemColors.Control;
+            Thread.Sleep(300);
+            Direction.BackColor = Color.DarkOrange;
+            Power.BackColor = Color.OliveDrab;
+            AutoBrake.BackColor = Color.Red;
+            IndeBrake.BackColor = Color.DarkMagenta;
             Thread.Sleep(500);
-            AutoBrake.Focus();
-            Thread.Sleep(500);
-            IndeBrake.Focus();
-            Thread.Sleep(500);
-            Direction.Focus();
-            //SCC.Visible = true;
-            //Thread.Sleep(1000);
-            //SCC.Visible = false;
+            Direction.BackColor = SystemColors.Control;
+            Power.BackColor = SystemColors.Control;
+            AutoBrake.BackColor = SystemColors.Control;
+            IndeBrake.BackColor = SystemColors.Control;
+            DirectionActivibility.ForeColor = Color.LightSeaGreen;
+            //Direction.Focus();
+            //Thread.Sleep(300);
+            //Power.Focus();
+            //Thread.Sleep(300);
+            //AutoBrake.Focus();
+            //Thread.Sleep(300);
+            //IndeBrake.Focus();
+            //Thread.Sleep(300);
+            //Direction.Focus();
+            //Thread.Sleep(300);
+            //Power.Focus();
+            //Thread.Sleep(300);
+            //AutoBrake.Focus();
+            //Thread.Sleep(300);
+            //IndeBrake.Focus();
+            //Thread.Sleep(300);
+            //Direction.Focus();
+            ////SCC.Visible = true;
+            ////Thread.Sleep(1000);
+            ////SCC.Visible = false;
         }
 
-        #region Focus Indicator via Color
+        #region Focus Indicator via TextColor
 
         private void Direction_Enter(object sender, EventArgs e)
         {
-            Direction.BackColor = Color.DarkOrange;
+            DirectionActivibility.ForeColor = Color.LightSeaGreen;
         }
 
         private void Direction_Leave(object sender, EventArgs e)
         {
-            Direction.BackColor = SystemColors.Control;
+            DirectionActivibility.ForeColor = Color.Black;
         }
 
         private void Power_Enter(object sender, EventArgs e)
         {
-            Power.BackColor = Color.SlateBlue;
+            PowerActivibility.ForeColor = Color.LightSeaGreen;
         }
 
         private void Power_Leave(object sender, EventArgs e)
         {
-            Power.BackColor = SystemColors.Control;
+            PowerActivibility.ForeColor= Color.Black;
         }
 
         private void AutoBrake_Enter(object sender, EventArgs e)
         {
-            AutoBrake.BackColor = Color.OrangeRed;
+            AutoActivibility.ForeColor = Color.LightSeaGreen;
         }
 
         private void AutoBrake_Leave(object sender, EventArgs e)
         {
-            AutoBrake.BackColor = SystemColors.Control;
+            AutoActivibility.ForeColor = Color.Black;
         }
 
         private void IndeBrake_Enter(object sender, EventArgs e)
         {
-            IndeBrake.BackColor = Color.DarkOrchid;
+            IndeActivibility.ForeColor = Color.LightSeaGreen;
         }
 
         private void IndeBrake_Leave(object sender, EventArgs e)
         {
-            IndeBrake.BackColor = SystemColors.Control;
+            IndeActivibility.ForeColor = Color.Black;
         }
 
         #endregion
@@ -174,17 +219,5 @@ namespace ArduinoLocomotiveController
             }
         }
 
-        //private void CheckNow_Paint(object sender, PaintEventArgs e)
-        //{
-        //    Direction.Focus();
-        //    Thread.Sleep(500);
-        //    Power.Focus();
-        //    Thread.Sleep(500);
-        //    AutoBrake.Focus();
-        //    Thread.Sleep(500);
-        //    IndeBrake.Focus();
-        //    Thread.Sleep(500);
-        //    Direction.Focus();
-        //}
     }
 }
