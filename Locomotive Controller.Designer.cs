@@ -627,9 +627,13 @@ namespace ArduinoLocomotiveController
             // PowerNum
             // 
             this.PowerNum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.PowerNum.CausesValidation = false;
             this.PowerNum.Cursor = System.Windows.Forms.Cursors.Default;
-            this.PowerNum.Font = new System.Drawing.Font("DigifaceWide", 75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PowerNum.DetectUrls = false;
+            this.PowerNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PowerNum.ForeColor = System.Drawing.SystemColors.Info;
+            this.PowerNum.HideSelection = false;
+            this.PowerNum.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.PowerNum.Location = new System.Drawing.Point(594, 252);
             this.PowerNum.Multiline = false;
             this.PowerNum.Name = "PowerNum";
@@ -640,6 +644,8 @@ namespace ArduinoLocomotiveController
             this.PowerNum.TabIndex = 12;
             this.PowerNum.TabStop = false;
             this.PowerNum.Text = "8";
+            this.PowerNum.WordWrap = false;
+            this.PowerNum.Enter += new System.EventHandler(this.PowerNum_Enter);
             // 
             // label1
             // 

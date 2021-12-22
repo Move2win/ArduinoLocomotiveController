@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Drawing.Text;
+using System.Reflection;
+using System.IO;
 
 namespace ArduinoLocomotiveController
 {
@@ -16,14 +19,31 @@ namespace ArduinoLocomotiveController
         bool PantagraphState = false;
         bool SCC_NeedHide = false;
 
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+
+        private PrivateFontCollection fonts = new PrivateFontCollection();
+
+        Font DigitalFont;
+
         public ControlPanel()
         {
             InitializeComponent();
+
+            byte[] fontData = Properties.Resources.digifaw;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            uint dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.digifaw.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.digifaw.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+
+            DigitalFont = new Font(fonts.Families[0], 75.0F, FontStyle.Italic);
         }
 
         private void ControlPanel_Load(object sender, EventArgs e)
         {
-            
+            PowerNum.Font = DigitalFont;
         }
         
         private void ControlPanel_Shown(object sender, EventArgs e)
@@ -313,6 +333,11 @@ namespace ArduinoLocomotiveController
         private void IndeBrake_Scroll(object sender, EventArgs e)
         {
 
+        }
+
+        private void PowerNum_Enter(object sender, EventArgs e)
+        {
+            Power.Focus();
         }
     }
 }
