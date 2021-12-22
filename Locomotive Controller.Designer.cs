@@ -65,6 +65,8 @@ namespace ArduinoLocomotiveController
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.Direction = new ArduinoLocomotiveController.TrackBarNoBorder();
+            this.Power = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.IndeActivibility = new System.Windows.Forms.TextBox();
             this.AutoActivibility = new System.Windows.Forms.TextBox();
@@ -76,16 +78,16 @@ namespace ArduinoLocomotiveController
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.SCC = new System.Windows.Forms.Label();
-            this.Direction = new ArduinoLocomotiveController.TrackBarNoBorder();
-            this.Power = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.AutoBrake = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.IndeBrake = new ArduinoLocomotiveController.TrackBarNoBorder();
+            this.SCC = new System.Windows.Forms.Label();
             this.SCing = new System.Windows.Forms.Label();
+            this.SCC_Cover = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Direction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Power)).BeginInit();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoBrake)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndeBrake)).BeginInit();
             this.SuspendLayout();
@@ -378,6 +380,37 @@ namespace ArduinoLocomotiveController
             this.label1.TabIndex = 2;
             this.label1.Text = "Forward";
             // 
+            // Direction
+            // 
+            this.Direction.BackColor = System.Drawing.SystemColors.Control;
+            this.Direction.LargeChange = 0;
+            this.Direction.Location = new System.Drawing.Point(92, 66);
+            this.Direction.Maximum = 1;
+            this.Direction.Minimum = -1;
+            this.Direction.Name = "Direction";
+            this.Direction.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.Direction.Size = new System.Drawing.Size(45, 341);
+            this.Direction.TabIndex = 0;
+            this.Direction.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.Direction.Enter += new System.EventHandler(this.Direction_Enter);
+            this.Direction.Leave += new System.EventHandler(this.Direction_Leave);
+            // 
+            // Power
+            // 
+            this.Power.BackColor = System.Drawing.SystemColors.Control;
+            this.Power.LargeChange = 0;
+            this.Power.Location = new System.Drawing.Point(287, 66);
+            this.Power.Maximum = 5;
+            this.Power.Minimum = -5;
+            this.Power.Name = "Power";
+            this.Power.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.Power.Size = new System.Drawing.Size(45, 341);
+            this.Power.TabIndex = 1;
+            this.Power.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.Power.Scroll += new System.EventHandler(this.Power_Scroll);
+            this.Power.Enter += new System.EventHandler(this.Power_Enter);
+            this.Power.Leave += new System.EventHandler(this.Power_Leave);
+            // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -517,50 +550,6 @@ namespace ArduinoLocomotiveController
             this.label10.TabIndex = 4;
             this.label10.Text = "Release";
             // 
-            // SCC
-            // 
-            this.SCC.AutoSize = true;
-            this.SCC.Font = new System.Drawing.Font("等线", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.SCC.Location = new System.Drawing.Point(496, 672);
-            this.SCC.Name = "SCC";
-            this.SCC.Size = new System.Drawing.Size(296, 33);
-            this.SCC.TabIndex = 9;
-            this.SCC.Text = "Self Check Complete";
-            this.SCC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SCC.UseMnemonic = false;
-            this.SCC.Visible = false;
-            // 
-            // Direction
-            // 
-            this.Direction.BackColor = System.Drawing.SystemColors.Control;
-            this.Direction.LargeChange = 0;
-            this.Direction.Location = new System.Drawing.Point(92, 66);
-            this.Direction.Maximum = 1;
-            this.Direction.Minimum = -1;
-            this.Direction.Name = "Direction";
-            this.Direction.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.Direction.Size = new System.Drawing.Size(45, 341);
-            this.Direction.TabIndex = 0;
-            this.Direction.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.Direction.Enter += new System.EventHandler(this.Direction_Enter);
-            this.Direction.Leave += new System.EventHandler(this.Direction_Leave);
-            // 
-            // Power
-            // 
-            this.Power.BackColor = System.Drawing.SystemColors.Control;
-            this.Power.LargeChange = 0;
-            this.Power.Location = new System.Drawing.Point(287, 66);
-            this.Power.Maximum = 5;
-            this.Power.Minimum = -5;
-            this.Power.Name = "Power";
-            this.Power.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.Power.Size = new System.Drawing.Size(45, 341);
-            this.Power.TabIndex = 1;
-            this.Power.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.Power.Scroll += new System.EventHandler(this.Power_Scroll);
-            this.Power.Enter += new System.EventHandler(this.Power_Enter);
-            this.Power.Leave += new System.EventHandler(this.Power_Leave);
-            // 
             // AutoBrake
             // 
             this.AutoBrake.BackColor = System.Drawing.SystemColors.Control;
@@ -589,6 +578,18 @@ namespace ArduinoLocomotiveController
             this.IndeBrake.Enter += new System.EventHandler(this.IndeBrake_Enter);
             this.IndeBrake.Leave += new System.EventHandler(this.IndeBrake_Leave);
             // 
+            // SCC
+            // 
+            this.SCC.AutoSize = true;
+            this.SCC.Font = new System.Drawing.Font("等线", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SCC.Location = new System.Drawing.Point(496, 672);
+            this.SCC.Name = "SCC";
+            this.SCC.Size = new System.Drawing.Size(296, 33);
+            this.SCC.TabIndex = 9;
+            this.SCC.Text = "Self Check Complete";
+            this.SCC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SCC.UseMnemonic = false;
+            // 
             // SCing
             // 
             this.SCing.AutoSize = true;
@@ -601,15 +602,41 @@ namespace ArduinoLocomotiveController
             this.SCing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.SCing.UseMnemonic = false;
             // 
+            // SCC_Cover
+            // 
+            this.SCC_Cover.BackColor = System.Drawing.SystemColors.Control;
+            this.SCC_Cover.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.SCC_Cover.Cursor = System.Windows.Forms.Cursors.Default;
+            this.SCC_Cover.Location = new System.Drawing.Point(502, 675);
+            this.SCC_Cover.Name = "SCC_Cover";
+            this.SCC_Cover.ReadOnly = true;
+            this.SCC_Cover.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.SCC_Cover.Size = new System.Drawing.Size(290, 30);
+            this.SCC_Cover.TabIndex = 11;
+            this.SCC_Cover.TabStop = false;
+            this.SCC_Cover.Text = "";
+            this.SCC_Cover.WordWrap = false;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.richTextBox1.Location = new System.Drawing.Point(596, 292);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(100, 128);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1284, 711);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.SCing);
-            this.Controls.Add(this.SCC);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.SCC_Cover);
+            this.Controls.Add(this.SCC);
             this.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -620,10 +647,10 @@ namespace ArduinoLocomotiveController
             this.Shown += new System.EventHandler(this.ControlPanel_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Direction)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Power)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoBrake)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndeBrake)).EndInit();
             this.ResumeLayout(false);
@@ -673,6 +700,8 @@ namespace ArduinoLocomotiveController
         private TrackBarNoBorder AutoBrake;
         private TrackBarNoBorder IndeBrake;
         private System.Windows.Forms.Label SCing;
+        private System.Windows.Forms.RichTextBox SCC_Cover;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -12,6 +12,10 @@ namespace ArduinoLocomotiveController
 {
     public partial class ControlPanel : Form
     {
+        bool ReverserLock = false;
+        bool PantagraphState = false;
+        bool SCC_NeedHide = false;
+
         public ControlPanel()
         {
             InitializeComponent();
@@ -19,41 +23,39 @@ namespace ArduinoLocomotiveController
 
         private void ControlPanel_Load(object sender, EventArgs e)
         {
-            bool ReverserLock = false;
-            bool PantagraphState = false;
             
         }
-
+        
         private void ControlPanel_Shown(object sender, EventArgs e)
         {
             DirectionActivibility.ForeColor = Color.Black;
             Application.DoEvents();
             Thread.Sleep(500);
             Direction.BackColor = Color.DarkOrange;
-            Thread.Sleep(300);
+            Thread.Sleep(250);
             Direction.BackColor = SystemColors.Control;
             Power.BackColor = Color.OliveDrab;
-            Thread.Sleep(300);
+            Thread.Sleep(250);
             Power.BackColor = SystemColors.Control;
             AutoBrake.BackColor = Color.Red;
-            Thread.Sleep(300);
+            Thread.Sleep(250);
             AutoBrake.BackColor = SystemColors.Control;
             IndeBrake.BackColor = Color.DarkMagenta;
-            Thread.Sleep(300);
+            Thread.Sleep(250);
             IndeBrake.BackColor = SystemColors.Control;
             Direction.BackColor = Color.DarkOrange;
-            Thread.Sleep(300);
+            Thread.Sleep(250);
             Direction.BackColor = SystemColors.Control;
             Power.BackColor = Color.OliveDrab;
-            Thread.Sleep(300);
+            Thread.Sleep(250);
             Power.BackColor = SystemColors.Control;
             AutoBrake.BackColor = Color.Red;
-            Thread.Sleep(300);
+            Thread.Sleep(250);
             AutoBrake.BackColor = SystemColors.Control;
             IndeBrake.BackColor = Color.DarkMagenta;
-            Thread.Sleep(300);
+            Thread.Sleep(250);
             IndeBrake.BackColor = SystemColors.Control;
-            Thread.Sleep(300);
+            Thread.Sleep(250);
             Direction.BackColor = Color.DarkOrange;
             Power.BackColor = Color.OliveDrab;
             AutoBrake.BackColor = Color.Red;
@@ -63,16 +65,16 @@ namespace ArduinoLocomotiveController
             Power.BackColor = SystemColors.Control;
             AutoBrake.BackColor = SystemColors.Control;
             IndeBrake.BackColor = SystemColors.Control;
-            DirectionActivibility.ForeColor = Color.LightSeaGreen;
-            SSC_Display();
+            SCing_Hide();
+            Application.DoEvents();
+            Direction_Enter(sender, e);
         }
 
-        private void SSC_Display()
+        private void SCing_Hide()
         {
             SCing.Visible = false;
-            SCC.Visible = true;
-            Thread.Sleep(500);
-            SCC.Visible = false;
+            SCC_Cover.Visible = false;
+            SCC_NeedHide = true;
         }
 
         #region Focus Indicator via TextColor
@@ -80,6 +82,13 @@ namespace ArduinoLocomotiveController
         private void Direction_Enter(object sender, EventArgs e)
         {
             DirectionActivibility.ForeColor = Color.LightSeaGreen;
+            if (SCC_NeedHide == true)
+            {
+                SCC.Visible = true;
+                Thread.Sleep(800);
+                SCC.Visible = false;
+                SCC_NeedHide = false;
+            }
         }
 
         private void Direction_Leave(object sender, EventArgs e)
@@ -90,6 +99,7 @@ namespace ArduinoLocomotiveController
         private void Power_Enter(object sender, EventArgs e)
         {
             PowerActivibility.ForeColor = Color.LightSeaGreen;
+            //SSC_Display();
         }
 
         private void Power_Leave(object sender, EventArgs e)
