@@ -85,6 +85,7 @@ namespace ArduinoLocomotiveController
             this.SCC_Cover = new System.Windows.Forms.RichTextBox();
             this.PowerNum = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Direction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Power)).BeginInit();
@@ -294,7 +295,7 @@ namespace ArduinoLocomotiveController
             this.DYNAMICBRAKE.AutoSize = true;
             this.DYNAMICBRAKE.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.DYNAMICBRAKE.ForeColor = System.Drawing.Color.Black;
-            this.DYNAMICBRAKE.Location = new System.Drawing.Point(332, 368);
+            this.DYNAMICBRAKE.Location = new System.Drawing.Point(333, 368);
             this.DYNAMICBRAKE.Name = "DYNAMICBRAKE";
             this.DYNAMICBRAKE.Size = new System.Drawing.Size(116, 50);
             this.DYNAMICBRAKE.TabIndex = 10;
@@ -305,7 +306,7 @@ namespace ArduinoLocomotiveController
             // 
             this.FULLTHROTTLE.AutoSize = true;
             this.FULLTHROTTLE.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FULLTHROTTLE.Location = new System.Drawing.Point(332, 53);
+            this.FULLTHROTTLE.Location = new System.Drawing.Point(333, 53);
             this.FULLTHROTTLE.Name = "FULLTHROTTLE";
             this.FULLTHROTTLE.Size = new System.Drawing.Size(120, 50);
             this.FULLTHROTTLE.TabIndex = 9;
@@ -317,7 +318,7 @@ namespace ArduinoLocomotiveController
             this.IDLE.AutoSize = true;
             this.IDLE.BackColor = System.Drawing.SystemColors.ControlLight;
             this.IDLE.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IDLE.Location = new System.Drawing.Point(338, 224);
+            this.IDLE.Location = new System.Drawing.Point(335, 224);
             this.IDLE.Name = "IDLE";
             this.IDLE.Size = new System.Drawing.Size(58, 25);
             this.IDLE.TabIndex = 8;
@@ -419,6 +420,7 @@ namespace ArduinoLocomotiveController
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.IndeActivibility);
             this.groupBox2.Controls.Add(this.AutoActivibility);
             this.groupBox2.Controls.Add(this.label17);
@@ -657,6 +659,13 @@ namespace ArduinoLocomotiveController
             this.label1.TabIndex = 13;
             this.label1.Text = "Power Level";
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(176, 244);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(12, 139);
+            this.panel1.TabIndex = 14;
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -736,6 +745,7 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.RichTextBox SCC_Cover;
         private System.Windows.Forms.RichTextBox PowerNum;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

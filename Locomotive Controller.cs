@@ -15,8 +15,8 @@ namespace ArduinoLocomotiveController
 {
     public partial class ControlPanel : Form
     {
-        bool ReverserLock = false;
-        bool PantagraphState = false;
+        //bool ReverserLock = false;  //False = Unlocked, True = Locked
+        bool PantagraphState = false;   //False = Lower, True = Upper
         bool SCC_NeedHide = false;
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
@@ -45,34 +45,52 @@ namespace ArduinoLocomotiveController
         {
             PowerNum.Font = DigitalFont;
         }
-        
+
+        #region SCA
+
         private void ControlPanel_Shown(object sender, EventArgs e)
         {
             DirectionActivibility.ForeColor = Color.Black;
             Application.DoEvents();
             Thread.Sleep(500);
             Direction.BackColor = Color.DarkOrange;
+            PowerNum.Text = "1";
+            Application.DoEvents();
             Thread.Sleep(250);
             Direction.BackColor = SystemColors.Control;
             Power.BackColor = Color.OliveDrab;
+            PowerNum.Text = "2";
+            Application.DoEvents();
             Thread.Sleep(250);
             Power.BackColor = SystemColors.Control;
             AutoBrake.BackColor = Color.Red;
+            PowerNum.Text = "3";
+            Application.DoEvents();
             Thread.Sleep(250);
             AutoBrake.BackColor = SystemColors.Control;
             IndeBrake.BackColor = Color.DarkMagenta;
+            PowerNum.Text = "4";
+            Application.DoEvents();
             Thread.Sleep(250);
             IndeBrake.BackColor = SystemColors.Control;
             Direction.BackColor = Color.DarkOrange;
+            PowerNum.Text = "5";
+            Application.DoEvents();
             Thread.Sleep(250);
             Direction.BackColor = SystemColors.Control;
             Power.BackColor = Color.OliveDrab;
+            PowerNum.Text = "6";
+            Application.DoEvents();
             Thread.Sleep(250);
             Power.BackColor = SystemColors.Control;
             AutoBrake.BackColor = Color.Red;
+            PowerNum.Text = "7";
+            Application.DoEvents();
             Thread.Sleep(250);
             AutoBrake.BackColor = SystemColors.Control;
             IndeBrake.BackColor = Color.DarkMagenta;
+            PowerNum.Text = "8";
+            Application.DoEvents();
             Thread.Sleep(250);
             IndeBrake.BackColor = SystemColors.Control;
             Thread.Sleep(250);
@@ -80,17 +98,22 @@ namespace ArduinoLocomotiveController
             Power.BackColor = Color.OliveDrab;
             AutoBrake.BackColor = Color.Red;
             IndeBrake.BackColor = Color.DarkMagenta;
+            PowerNum.Text = "";
+            Application.DoEvents();
             Thread.Sleep(500);
             Direction.BackColor = SystemColors.Control;
             Power.BackColor = SystemColors.Control;
             AutoBrake.BackColor = SystemColors.Control;
             IndeBrake.BackColor = SystemColors.Control;
+            PowerNum.Text = "8";
+            Application.DoEvents();
             SCing_Hide();
-            PowerNum.Text = "0";
             NeutralL.BackColor = NeutralR.BackColor = Color.Yellow;
             IDLE.BackColor = Color.SpringGreen;
-            Application.DoEvents();
             Direction_Enter(sender, e);
+            PowerNum.Text = "0";
+            Power.Enabled = false;
+            Application.DoEvents();
         }
 
         private void SCing_Hide()
@@ -100,7 +123,9 @@ namespace ArduinoLocomotiveController
             SCC_NeedHide = true;
         }
 
-        #region Focus Indicator via TextColor
+        #endregion
+
+        #region Focus Indication via TextColor
 
         private void Direction_Enter(object sender, EventArgs e)
         {
@@ -153,6 +178,8 @@ namespace ArduinoLocomotiveController
 
         private void Direction_Scroll(object sender, EventArgs e)
          {
+            #region Label Color Change
+
             switch (Direction.Value)
             {
                 case 1:
@@ -183,10 +210,27 @@ namespace ArduinoLocomotiveController
                     ReverseR.BackColor = Color.Yellow;
                     break;
             }
-         }
+
+            #endregion
+
+            #region pBarLock
+
+            if (Direction.Value != 0)
+            {
+                Power.Enabled = true;
+            }
+            else
+            {
+                Power.Enabled = false;
+            }
+
+            #endregion
+        }
 
         private void Power_Scroll(object sender, EventArgs e)
         {
+            #region pBar Color Change
+
             switch (Power.Value)
             {
                 case 5:
@@ -273,7 +317,9 @@ namespace ArduinoLocomotiveController
                     break;
             }
 
-            #region Power底色
+            #endregion
+
+            #region pBar Label Color Change
 
             if (Power.Value == 5)
             {
@@ -318,11 +364,59 @@ namespace ArduinoLocomotiveController
 
             #endregion
 
+            #region ReverserLock & pBar/pNum Color Change
+
             switch (Power.Value)
             {
                 case var expression when Power.Value > 0:
+                    Direction.Enabled = false;
+                    Power.BackColor = Color.DarkOliveGreen;
+                    PowerNum.ForeColor = Color.LimeGreen;
+                    break;
+                case 0:
+                    Direction.Enabled = true;
+                    Power.BackColor = SystemColors.Control;
+                    PowerNum.ForeColor = SystemColors.Info;
+                    break;
+                case var expression when Power.Value < 0:
+                    Direction.Enabled = false;
+                    Power.BackColor = Color.DarkGoldenrod;
+                    PowerNum.ForeColor = Color.Gold;
                     break;
             }
+
+            #endregion
+
+            #region pNum Display
+
+            switch (Power.Value)
+            {
+                case 0:
+                    PowerNum.Text = "0";
+                    break;
+                case 1:
+                case -1:
+                    PowerNum.Text = "1";
+                    break;
+                case 2:
+                case -2:
+                    PowerNum.Text = "2";
+                    break;
+                case 3:
+                case -3:
+                    PowerNum.Text = "3";
+                    break;
+                case 4:
+                case -4:
+                    PowerNum.Text = "4";
+                    break;
+                case 5:
+                case -5:
+                    PowerNum.Text = "5";
+                    break;
+            }
+
+            #endregion
         }
 
         private void AutoBrake_Scroll(object sender, EventArgs e)
