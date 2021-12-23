@@ -42,6 +42,8 @@ namespace ArduinoLocomotiveController
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlPanel));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.DirectionLock = new System.Windows.Forms.Label();
+            this.PowerLock = new System.Windows.Forms.Label();
             this.PowerActivibility = new System.Windows.Forms.TextBox();
             this.DirectionActivibility = new System.Windows.Forms.TextBox();
             this.B1 = new System.Windows.Forms.Panel();
@@ -91,8 +93,9 @@ namespace ArduinoLocomotiveController
             this.SCC_Cover = new System.Windows.Forms.RichTextBox();
             this.PowerNum = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.PowerLock = new System.Windows.Forms.Label();
-            this.DirectionLock = new System.Windows.Forms.Label();
+            this.BaudList = new System.Windows.Forms.ComboBox();
+            this.PortList = new System.Windows.Forms.ComboBox();
+            this.Connect = new System.Windows.Forms.Button();
             this.Direction = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.Power = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.AutoBrake = new ArduinoLocomotiveController.TrackBarNoBorder();
@@ -142,6 +145,34 @@ namespace ArduinoLocomotiveController
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Power Combined";
+            // 
+            // DirectionLock
+            // 
+            this.DirectionLock.AutoSize = true;
+            this.DirectionLock.BackColor = System.Drawing.Color.Green;
+            this.DirectionLock.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DirectionLock.ForeColor = System.Drawing.Color.Yellow;
+            this.DirectionLock.Location = new System.Drawing.Point(41, 29);
+            this.DirectionLock.Name = "DirectionLock";
+            this.DirectionLock.Padding = new System.Windows.Forms.Padding(0, 4, 0, 3);
+            this.DirectionLock.Size = new System.Drawing.Size(153, 32);
+            this.DirectionLock.TabIndex = 17;
+            this.DirectionLock.Text = "Reverser Lock";
+            this.DirectionLock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PowerLock
+            // 
+            this.PowerLock.AutoSize = true;
+            this.PowerLock.BackColor = System.Drawing.Color.Red;
+            this.PowerLock.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.PowerLock.ForeColor = System.Drawing.Color.Yellow;
+            this.PowerLock.Location = new System.Drawing.Point(388, 220);
+            this.PowerLock.Name = "PowerLock";
+            this.PowerLock.Padding = new System.Windows.Forms.Padding(0, 4, 0, 3);
+            this.PowerLock.Size = new System.Drawing.Size(69, 32);
+            this.PowerLock.TabIndex = 16;
+            this.PowerLock.Text = "LOCK";
+            this.PowerLock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PowerActivibility
             // 
@@ -714,33 +745,30 @@ namespace ArduinoLocomotiveController
             this.label1.TabIndex = 13;
             this.label1.Text = "Power Level";
             // 
-            // PowerLock
+            // BaudList
             // 
-            this.PowerLock.AutoSize = true;
-            this.PowerLock.BackColor = System.Drawing.Color.Red;
-            this.PowerLock.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.PowerLock.ForeColor = System.Drawing.Color.Yellow;
-            this.PowerLock.Location = new System.Drawing.Point(388, 220);
-            this.PowerLock.Name = "PowerLock";
-            this.PowerLock.Padding = new System.Windows.Forms.Padding(0, 4, 0, 3);
-            this.PowerLock.Size = new System.Drawing.Size(69, 32);
-            this.PowerLock.TabIndex = 16;
-            this.PowerLock.Text = "LOCK";
-            this.PowerLock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BaudList.FormattingEnabled = true;
+            this.BaudList.Location = new System.Drawing.Point(161, 680);
+            this.BaudList.Name = "BaudList";
+            this.BaudList.Size = new System.Drawing.Size(121, 25);
+            this.BaudList.TabIndex = 14;
             // 
-            // DirectionLock
+            // PortList
             // 
-            this.DirectionLock.AutoSize = true;
-            this.DirectionLock.BackColor = System.Drawing.Color.Green;
-            this.DirectionLock.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DirectionLock.ForeColor = System.Drawing.Color.Yellow;
-            this.DirectionLock.Location = new System.Drawing.Point(41, 29);
-            this.DirectionLock.Name = "DirectionLock";
-            this.DirectionLock.Padding = new System.Windows.Forms.Padding(0, 4, 0, 3);
-            this.DirectionLock.Size = new System.Drawing.Size(153, 32);
-            this.DirectionLock.TabIndex = 17;
-            this.DirectionLock.Text = "Reverser Lock";
-            this.DirectionLock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.PortList.FormattingEnabled = true;
+            this.PortList.Location = new System.Drawing.Point(16, 680);
+            this.PortList.Name = "PortList";
+            this.PortList.Size = new System.Drawing.Size(121, 25);
+            this.PortList.TabIndex = 15;
+            // 
+            // Connect
+            // 
+            this.Connect.Location = new System.Drawing.Point(307, 680);
+            this.Connect.Name = "Connect";
+            this.Connect.Size = new System.Drawing.Size(121, 25);
+            this.Connect.TabIndex = 16;
+            this.Connect.Text = "Connect";
+            this.Connect.UseVisualStyleBackColor = true;
             // 
             // Direction
             // 
@@ -809,6 +837,9 @@ namespace ArduinoLocomotiveController
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1284, 711);
+            this.Controls.Add(this.Connect);
+            this.Controls.Add(this.PortList);
+            this.Controls.Add(this.BaudList);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PowerNum);
             this.Controls.Add(this.SCing);
@@ -897,6 +928,9 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.Label AutoApp;
         private System.Windows.Forms.Label PowerLock;
         private System.Windows.Forms.Label DirectionLock;
+        private System.Windows.Forms.ComboBox BaudList;
+        private System.Windows.Forms.ComboBox PortList;
+        private System.Windows.Forms.Button Connect;
     }
 }
 

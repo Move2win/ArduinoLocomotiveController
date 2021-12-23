@@ -55,6 +55,14 @@ namespace ArduinoLocomotiveController
         {
             PowerNum.Font = DigitalFont;
             CheckForIllegalCrossThreadCalls = false;
+
+            #region Arduino Support Initialization
+
+            string[] Baud = { "9600", "115200" };
+            PortList.Items.AddRange(System.IO.Ports.SerialPort.GetPortNames());
+            BaudList.Items.AddRange(Baud);
+
+            #endregion
         }
 
         #region SCA
@@ -62,6 +70,7 @@ namespace ArduinoLocomotiveController
         private void ControlPanel_Shown(object sender, EventArgs e)
         {
             DirectionActivibility.ForeColor = Color.Black;
+            PortList.Enabled = BaudList.Enabled = false;
             Application.DoEvents();
             //
             //111
@@ -180,6 +189,7 @@ namespace ArduinoLocomotiveController
             PowerLock.Visible = true;
             Power.Enabled = false;
             Application.DoEvents();
+            PortList.Enabled = BaudList.Enabled = true;
         }
 
         private void SCing_Hide()
