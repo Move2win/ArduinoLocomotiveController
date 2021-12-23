@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region using
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +13,8 @@ using System.Drawing.Text;
 using System.Reflection;
 using System.IO;
 
+#endregion
+
 namespace ArduinoLocomotiveController
 {
     public partial class ControlPanel : Form
@@ -21,7 +25,7 @@ namespace ArduinoLocomotiveController
         bool AutoFlashFirstTime = true;
         bool IndeFlashFirstTime = true;
 
-        #region FontBind
+        #region FontEmbed
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -167,9 +171,11 @@ namespace ArduinoLocomotiveController
             //SCC
             //
             SCing_Hide();
+            Application.DoEvents();
             NeutralL.BackColor = NeutralR.BackColor = Color.Yellow;
             IDLE.BackColor = Color.SpringGreen;
             Direction_Enter(sender, e);
+            Application.DoEvents();
             PowerNum.Text = "0";
             PowerLock.Visible = true;
             Power.Enabled = false;
@@ -181,6 +187,7 @@ namespace ArduinoLocomotiveController
             SCing.Visible = false;
             SCC_Cover.Visible = false;
             SCC_NeedHide = true;
+            Application.DoEvents();
         }
 
         #endregion
@@ -193,7 +200,8 @@ namespace ArduinoLocomotiveController
             if (SCC_NeedHide == true)
             {
                 SCC.Visible = true;
-                Thread.Sleep(800);
+                Application.DoEvents();
+                Thread.Sleep(1000);
                 SCC.Visible = false;
                 SCC_NeedHide = false;
             }
@@ -565,45 +573,45 @@ namespace ArduinoLocomotiveController
             #endregion
         }
 
-        #region AutoFlashFunction
+        //#region AutoFlashFunction
 
-        public void AutoFlash()
-        {
-            while (AutoBrake.Value != 0)
-            {
-                //if (AutoBrake.InvokeRequired)
-                //{
-                //    Action<int> action = new Action<int>(AutoFlash);
-                //    Invoke(action, new object[] { ABValue });
-                //}
-                //else
-                //{
-                //    AutoBrake.Value = ABValue;
-                //}
+        //public void AutoFlash()
+        //{
+        //    while (AutoBrake.Value != 0)
+        //    {
+        //        //if (AutoBrake.InvokeRequired)
+        //        //{
+        //        //    Action<int> action = new Action<int>(AutoFlash);
+        //        //    Invoke(action, new object[] { ABValue });
+        //        //}
+        //        //else
+        //        //{
+        //        //    AutoBrake.Value = ABValue;
+        //        //}
                 
 
-                //if (AutoBrake.Value != 0)
-                //{
-                    LblAuto.ForeColor = Color.Red;
-                    Thread.Sleep(500);
-                    LblAuto.ForeColor = Color.Black;
-                    Thread.Sleep(500);
-                //}
-                //else
-                //{
-                //LblAuto.ForeColor = Color.Black;
-                //break;
-                //}
-            }
-            //LblAuto.ForeColor = Color.Black;
-        }
-
-        //private void SetABValue(TrackBarNoBorder tBar, int value)
-        //{
-        //    tBar.Value = value;
+        //        //if (AutoBrake.Value != 0)
+        //        //{
+        //            LblAuto.ForeColor = Color.Red;
+        //            Thread.Sleep(500);
+        //            LblAuto.ForeColor = Color.Black;
+        //            Thread.Sleep(500);
+        //        //}
+        //        //else
+        //        //{
+        //        //LblAuto.ForeColor = Color.Black;
+        //        //break;
+        //        //}
+        //    }
+        //    //LblAuto.ForeColor = Color.Black;
         //}
 
-        #endregion
+        ////private void SetABValue(TrackBarNoBorder tBar, int value)
+        ////{
+        ////    tBar.Value = value;
+        ////}
+
+        //#endregion
 
         private void IndeBrake_Scroll(object sender, EventArgs e)
         {
@@ -616,15 +624,15 @@ namespace ArduinoLocomotiveController
                     IndeApp.Visible = false;
                     break;
                 case 1:
-                    IHL.BackColor = IHR.BackColor = Color.Red;
+                    IHL.BackColor = IHR.BackColor = Color.DarkMagenta;
                     IFL.BackColor = IFR.BackColor = SystemColors.Control;
                     IndeApp.Visible = true;
                     IFL.Size = new Size(13, 139);
                     IFR.Size = new Size(14, 139);
                     break;
                 case 2:
-                    IHL.BackColor = IHR.BackColor = Color.Red;
-                    IFL.BackColor = IFR.BackColor = Color.Red;
+                    IHL.BackColor = IHR.BackColor = Color.DarkMagenta;
+                    IFL.BackColor = IFR.BackColor = Color.DarkMagenta;
                     IndeApp.Visible = true;
                     //IFL.Size.Height = IFR.Size.Height = 159;
                     IFL.Size = new Size(13, 159);
@@ -655,36 +663,22 @@ namespace ArduinoLocomotiveController
             #endregion
         }
 
-        #region IndeFlashFunction
+        //#region IndeFlashFunction
 
-        public void IndeFlash()
-        {
-            while (IndeBrake.Value != 0)
-            {
-                LblInde.ForeColor = Color.Red;
-                Thread.Sleep(500);
-                LblInde.ForeColor = Color.Black;
-                Thread.Sleep(500);
-            }
-        }
+        //public void IndeFlash()
+        //{
+        //    while (IndeBrake.Value != 0)
+        //    {
+        //        LblInde.ForeColor = Color.Red;
+        //        Thread.Sleep(500);
+        //        LblInde.ForeColor = Color.Black;
+        //        Thread.Sleep(500);
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
-        #region Disable Mouse Pointer
-
-        private void PowerNum_Enter(object sender, EventArgs e)
-        {
-            if (Power.Enabled == false)
-            {
-                Direction.Focus();
-            }
-            else
-            {
-                Power.Focus();
-            }
-        }
-
-        #endregion
+        #region BrakeFlash Function
 
         public void BrakeFlash()
         {
@@ -714,6 +708,24 @@ namespace ArduinoLocomotiveController
                 Thread.Sleep(500);
             }
         }
+
+        #endregion
+
+        #region Disable Mouse Pointer
+
+        private void PowerNum_Enter(object sender, EventArgs e)
+        {
+            if (Power.Enabled == false)
+            {
+                Direction.Focus();
+            }
+            else
+            {
+                Power.Focus();
+            }
+        }
+
+        #endregion
 
         private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)
         {
