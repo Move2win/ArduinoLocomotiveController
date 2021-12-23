@@ -65,31 +65,42 @@ namespace ArduinoLocomotiveController
             this.NeutralL = new System.Windows.Forms.Label();
             this.ForwardR = new System.Windows.Forms.Label();
             this.ForwardL = new System.Windows.Forms.Label();
-            this.Direction = new ArduinoLocomotiveController.TrackBarNoBorder();
-            this.Power = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.IndeApp = new System.Windows.Forms.Label();
+            this.AutoApp = new System.Windows.Forms.Label();
+            this.IFR = new System.Windows.Forms.Panel();
+            this.AFR = new System.Windows.Forms.Panel();
+            this.IHR = new System.Windows.Forms.Panel();
+            this.AHR = new System.Windows.Forms.Panel();
+            this.IFL = new System.Windows.Forms.Panel();
+            this.IHL = new System.Windows.Forms.Panel();
+            this.AFL = new System.Windows.Forms.Panel();
+            this.AHL = new System.Windows.Forms.Panel();
             this.IndeActivibility = new System.Windows.Forms.TextBox();
             this.AutoActivibility = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.LblInde = new System.Windows.Forms.Label();
+            this.LblAuto = new System.Windows.Forms.Label();
             this.IFull = new System.Windows.Forms.Label();
             this.AFull = new System.Windows.Forms.Label();
             this.IHalf = new System.Windows.Forms.Label();
             this.AHalf = new System.Windows.Forms.Label();
             this.IRelease = new System.Windows.Forms.Label();
             this.ARelease = new System.Windows.Forms.Label();
-            this.AutoBrake = new ArduinoLocomotiveController.TrackBarNoBorder();
-            this.IndeBrake = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.SCC = new System.Windows.Forms.Label();
             this.SCing = new System.Windows.Forms.Label();
             this.SCC_Cover = new System.Windows.Forms.RichTextBox();
             this.PowerNum = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.PowerLock = new System.Windows.Forms.Label();
+            this.DirectionLock = new System.Windows.Forms.Label();
+            this.Direction = new ArduinoLocomotiveController.TrackBarNoBorder();
+            this.Power = new ArduinoLocomotiveController.TrackBarNoBorder();
+            this.AutoBrake = new ArduinoLocomotiveController.TrackBarNoBorder();
+            this.IndeBrake = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Direction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Power)).BeginInit();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoBrake)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndeBrake)).BeginInit();
             this.SuspendLayout();
@@ -97,6 +108,8 @@ namespace ArduinoLocomotiveController
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox1.Controls.Add(this.DirectionLock);
+            this.groupBox1.Controls.Add(this.PowerLock);
             this.groupBox1.Controls.Add(this.PowerActivibility);
             this.groupBox1.Controls.Add(this.DirectionActivibility);
             this.groupBox1.Controls.Add(this.B1);
@@ -318,9 +331,10 @@ namespace ArduinoLocomotiveController
             this.IDLE.AutoSize = true;
             this.IDLE.BackColor = System.Drawing.SystemColors.ControlLight;
             this.IDLE.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IDLE.Location = new System.Drawing.Point(335, 224);
+            this.IDLE.Location = new System.Drawing.Point(335, 220);
             this.IDLE.Name = "IDLE";
-            this.IDLE.Size = new System.Drawing.Size(58, 25);
+            this.IDLE.Padding = new System.Windows.Forms.Padding(0, 4, 0, 3);
+            this.IDLE.Size = new System.Drawing.Size(58, 32);
             this.IDLE.TabIndex = 8;
             this.IDLE.Text = "IDLE";
             // 
@@ -328,9 +342,10 @@ namespace ArduinoLocomotiveController
             // 
             this.ReverseR.AutoSize = true;
             this.ReverseR.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ReverseR.Location = new System.Drawing.Point(138, 385);
+            this.ReverseR.Location = new System.Drawing.Point(138, 382);
             this.ReverseR.Name = "ReverseR";
-            this.ReverseR.Size = new System.Drawing.Size(73, 19);
+            this.ReverseR.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.ReverseR.Size = new System.Drawing.Size(73, 25);
             this.ReverseR.TabIndex = 7;
             this.ReverseR.Text = "Reverse";
             // 
@@ -338,9 +353,10 @@ namespace ArduinoLocomotiveController
             // 
             this.ReverseL.AutoSize = true;
             this.ReverseL.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ReverseL.Location = new System.Drawing.Point(17, 385);
+            this.ReverseL.Location = new System.Drawing.Point(17, 382);
             this.ReverseL.Name = "ReverseL";
-            this.ReverseL.Size = new System.Drawing.Size(73, 19);
+            this.ReverseL.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.ReverseL.Size = new System.Drawing.Size(73, 25);
             this.ReverseL.TabIndex = 6;
             this.ReverseL.Text = "Reverse";
             // 
@@ -348,9 +364,10 @@ namespace ArduinoLocomotiveController
             // 
             this.NeutralR.AutoSize = true;
             this.NeutralR.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.NeutralR.Location = new System.Drawing.Point(138, 228);
+            this.NeutralR.Location = new System.Drawing.Point(138, 225);
             this.NeutralR.Name = "NeutralR";
-            this.NeutralR.Size = new System.Drawing.Size(69, 19);
+            this.NeutralR.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.NeutralR.Size = new System.Drawing.Size(69, 25);
             this.NeutralR.TabIndex = 5;
             this.NeutralR.Text = "Neutral";
             // 
@@ -358,9 +375,10 @@ namespace ArduinoLocomotiveController
             // 
             this.NeutralL.AutoSize = true;
             this.NeutralL.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.NeutralL.Location = new System.Drawing.Point(21, 228);
+            this.NeutralL.Location = new System.Drawing.Point(21, 225);
             this.NeutralL.Name = "NeutralL";
-            this.NeutralL.Size = new System.Drawing.Size(69, 19);
+            this.NeutralL.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.NeutralL.Size = new System.Drawing.Size(69, 25);
             this.NeutralL.TabIndex = 4;
             this.NeutralL.Text = "Neutral";
             // 
@@ -368,9 +386,10 @@ namespace ArduinoLocomotiveController
             // 
             this.ForwardR.AutoSize = true;
             this.ForwardR.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ForwardR.Location = new System.Drawing.Point(138, 70);
+            this.ForwardR.Location = new System.Drawing.Point(138, 67);
             this.ForwardR.Name = "ForwardR";
-            this.ForwardR.Size = new System.Drawing.Size(75, 19);
+            this.ForwardR.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.ForwardR.Size = new System.Drawing.Size(75, 25);
             this.ForwardR.TabIndex = 3;
             this.ForwardR.Text = "Forward";
             // 
@@ -379,52 +398,30 @@ namespace ArduinoLocomotiveController
             this.ForwardL.AutoSize = true;
             this.ForwardL.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ForwardL.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ForwardL.Location = new System.Drawing.Point(15, 70);
+            this.ForwardL.Location = new System.Drawing.Point(15, 67);
             this.ForwardL.Name = "ForwardL";
-            this.ForwardL.Size = new System.Drawing.Size(75, 19);
+            this.ForwardL.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.ForwardL.Size = new System.Drawing.Size(75, 25);
             this.ForwardL.TabIndex = 2;
             this.ForwardL.Text = "Forward";
-            // 
-            // Direction
-            // 
-            this.Direction.BackColor = System.Drawing.SystemColors.Control;
-            this.Direction.LargeChange = 0;
-            this.Direction.Location = new System.Drawing.Point(92, 66);
-            this.Direction.Maximum = 1;
-            this.Direction.Minimum = -1;
-            this.Direction.Name = "Direction";
-            this.Direction.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.Direction.Size = new System.Drawing.Size(45, 341);
-            this.Direction.TabIndex = 0;
-            this.Direction.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.Direction.Scroll += new System.EventHandler(this.Direction_Scroll);
-            this.Direction.Enter += new System.EventHandler(this.Direction_Enter);
-            this.Direction.Leave += new System.EventHandler(this.Direction_Leave);
-            // 
-            // Power
-            // 
-            this.Power.BackColor = System.Drawing.SystemColors.Control;
-            this.Power.LargeChange = 0;
-            this.Power.Location = new System.Drawing.Point(287, 66);
-            this.Power.Maximum = 5;
-            this.Power.Minimum = -5;
-            this.Power.Name = "Power";
-            this.Power.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.Power.Size = new System.Drawing.Size(45, 341);
-            this.Power.TabIndex = 1;
-            this.Power.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.Power.Scroll += new System.EventHandler(this.Power_Scroll);
-            this.Power.Enter += new System.EventHandler(this.Power_Enter);
-            this.Power.Leave += new System.EventHandler(this.Power_Leave);
             // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.groupBox2.Controls.Add(this.panel1);
+            this.groupBox2.Controls.Add(this.IndeApp);
+            this.groupBox2.Controls.Add(this.AutoApp);
+            this.groupBox2.Controls.Add(this.IFR);
+            this.groupBox2.Controls.Add(this.AFR);
+            this.groupBox2.Controls.Add(this.IHR);
+            this.groupBox2.Controls.Add(this.AHR);
+            this.groupBox2.Controls.Add(this.IFL);
+            this.groupBox2.Controls.Add(this.IHL);
+            this.groupBox2.Controls.Add(this.AFL);
+            this.groupBox2.Controls.Add(this.AHL);
             this.groupBox2.Controls.Add(this.IndeActivibility);
             this.groupBox2.Controls.Add(this.AutoActivibility);
-            this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.LblInde);
+            this.groupBox2.Controls.Add(this.LblAuto);
             this.groupBox2.Controls.Add(this.IFull);
             this.groupBox2.Controls.Add(this.AFull);
             this.groupBox2.Controls.Add(this.IHalf);
@@ -434,12 +431,100 @@ namespace ArduinoLocomotiveController
             this.groupBox2.Controls.Add(this.AutoBrake);
             this.groupBox2.Controls.Add(this.IndeBrake);
             this.groupBox2.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(745, 217);
+            this.groupBox2.Location = new System.Drawing.Point(746, 217);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(447, 452);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Brake System";
+            // 
+            // IndeApp
+            // 
+            this.IndeApp.AutoSize = true;
+            this.IndeApp.BackColor = System.Drawing.Color.DarkOrange;
+            this.IndeApp.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.IndeApp.Location = new System.Drawing.Point(235, 31);
+            this.IndeApp.Name = "IndeApp";
+            this.IndeApp.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.IndeApp.Size = new System.Drawing.Size(78, 27);
+            this.IndeApp.TabIndex = 23;
+            this.IndeApp.Text = "Applied";
+            // 
+            // AutoApp
+            // 
+            this.AutoApp.AutoSize = true;
+            this.AutoApp.BackColor = System.Drawing.Color.DarkOrange;
+            this.AutoApp.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.AutoApp.Location = new System.Drawing.Point(139, 31);
+            this.AutoApp.Name = "AutoApp";
+            this.AutoApp.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.AutoApp.Size = new System.Drawing.Size(78, 27);
+            this.AutoApp.TabIndex = 22;
+            this.AutoApp.Text = "Applied";
+            // 
+            // IFR
+            // 
+            this.IFR.BackColor = System.Drawing.SystemColors.Control;
+            this.IFR.Location = new System.Drawing.Point(264, 88);
+            this.IFR.Name = "IFR";
+            this.IFR.Size = new System.Drawing.Size(14, 139);
+            this.IFR.TabIndex = 21;
+            // 
+            // AFR
+            // 
+            this.AFR.BackColor = System.Drawing.SystemColors.Control;
+            this.AFR.Location = new System.Drawing.Point(197, 87);
+            this.AFR.Name = "AFR";
+            this.AFR.Size = new System.Drawing.Size(14, 139);
+            this.AFR.TabIndex = 17;
+            // 
+            // IHR
+            // 
+            this.IHR.BackColor = System.Drawing.SystemColors.Control;
+            this.IHR.Location = new System.Drawing.Point(264, 244);
+            this.IHR.Name = "IHR";
+            this.IHR.Size = new System.Drawing.Size(14, 141);
+            this.IHR.TabIndex = 19;
+            // 
+            // AHR
+            // 
+            this.AHR.BackColor = System.Drawing.SystemColors.Control;
+            this.AHR.Location = new System.Drawing.Point(197, 244);
+            this.AHR.Name = "AHR";
+            this.AHR.Size = new System.Drawing.Size(14, 141);
+            this.AHR.TabIndex = 15;
+            // 
+            // IFL
+            // 
+            this.IFL.BackColor = System.Drawing.SystemColors.Control;
+            this.IFL.Location = new System.Drawing.Point(243, 88);
+            this.IFL.Name = "IFL";
+            this.IFL.Size = new System.Drawing.Size(13, 139);
+            this.IFL.TabIndex = 20;
+            // 
+            // IHL
+            // 
+            this.IHL.BackColor = System.Drawing.SystemColors.Control;
+            this.IHL.Location = new System.Drawing.Point(243, 244);
+            this.IHL.Name = "IHL";
+            this.IHL.Size = new System.Drawing.Size(13, 141);
+            this.IHL.TabIndex = 18;
+            // 
+            // AFL
+            // 
+            this.AFL.BackColor = System.Drawing.SystemColors.Control;
+            this.AFL.Location = new System.Drawing.Point(176, 87);
+            this.AFL.Name = "AFL";
+            this.AFL.Size = new System.Drawing.Size(13, 139);
+            this.AFL.TabIndex = 16;
+            // 
+            // AHL
+            // 
+            this.AHL.BackColor = System.Drawing.SystemColors.Control;
+            this.AHL.Location = new System.Drawing.Point(176, 244);
+            this.AHL.Name = "AHL";
+            this.AHL.Size = new System.Drawing.Size(13, 141);
+            this.AHL.TabIndex = 14;
             // 
             // IndeActivibility
             // 
@@ -475,27 +560,27 @@ namespace ArduinoLocomotiveController
             this.AutoActivibility.Text = "Active";
             this.AutoActivibility.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label17
+            // LblInde
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label17.Location = new System.Drawing.Point(385, 92);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(20, 289);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "I\r\nN\r\nD\r\nE\r\nP\r\nE\r\nN\r\nD\r\nE\r\nN\r\nT\r\n\r\nB\r\nR\r\nA\r\nK\r\nE";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblInde.AutoSize = true;
+            this.LblInde.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LblInde.Location = new System.Drawing.Point(385, 92);
+            this.LblInde.Name = "LblInde";
+            this.LblInde.Size = new System.Drawing.Size(20, 289);
+            this.LblInde.TabIndex = 11;
+            this.LblInde.Text = "I\r\nN\r\nD\r\nE\r\nP\r\nE\r\nN\r\nD\r\nE\r\nN\r\nT\r\n\r\nB\r\nR\r\nA\r\nK\r\nE";
+            this.LblInde.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label16
+            // LblAuto
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label16.Location = new System.Drawing.Point(49, 151);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(20, 170);
-            this.label16.TabIndex = 10;
-            this.label16.Text = "A\r\nU\r\nT\r\nO\r\n\r\nB\r\nR\r\nA\r\nK\r\nE";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblAuto.AutoSize = true;
+            this.LblAuto.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LblAuto.Location = new System.Drawing.Point(49, 151);
+            this.LblAuto.Name = "LblAuto";
+            this.LblAuto.Size = new System.Drawing.Size(20, 170);
+            this.LblAuto.TabIndex = 10;
+            this.LblAuto.Text = "A\r\nU\r\nT\r\nO\r\n\r\nB\r\nR\r\nA\r\nK\r\nE";
+            this.LblAuto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // IFull
             // 
@@ -557,41 +642,11 @@ namespace ArduinoLocomotiveController
             this.ARelease.TabIndex = 4;
             this.ARelease.Text = "Release";
             // 
-            // AutoBrake
-            // 
-            this.AutoBrake.BackColor = System.Drawing.SystemColors.Control;
-            this.AutoBrake.LargeChange = 0;
-            this.AutoBrake.Location = new System.Drawing.Point(172, 66);
-            this.AutoBrake.Maximum = 2;
-            this.AutoBrake.Name = "AutoBrake";
-            this.AutoBrake.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.AutoBrake.Size = new System.Drawing.Size(45, 341);
-            this.AutoBrake.TabIndex = 2;
-            this.AutoBrake.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.AutoBrake.Scroll += new System.EventHandler(this.AutoBrake_Scroll);
-            this.AutoBrake.Enter += new System.EventHandler(this.AutoBrake_Enter);
-            this.AutoBrake.Leave += new System.EventHandler(this.AutoBrake_Leave);
-            // 
-            // IndeBrake
-            // 
-            this.IndeBrake.BackColor = System.Drawing.SystemColors.Control;
-            this.IndeBrake.LargeChange = 0;
-            this.IndeBrake.Location = new System.Drawing.Point(239, 66);
-            this.IndeBrake.Maximum = 2;
-            this.IndeBrake.Name = "IndeBrake";
-            this.IndeBrake.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.IndeBrake.Size = new System.Drawing.Size(45, 341);
-            this.IndeBrake.TabIndex = 3;
-            this.IndeBrake.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.IndeBrake.Scroll += new System.EventHandler(this.IndeBrake_Scroll);
-            this.IndeBrake.Enter += new System.EventHandler(this.IndeBrake_Enter);
-            this.IndeBrake.Leave += new System.EventHandler(this.IndeBrake_Leave);
-            // 
             // SCC
             // 
             this.SCC.AutoSize = true;
             this.SCC.Font = new System.Drawing.Font("等线", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.SCC.Location = new System.Drawing.Point(496, 672);
+            this.SCC.Location = new System.Drawing.Point(496, 675);
             this.SCC.Name = "SCC";
             this.SCC.Size = new System.Drawing.Size(296, 33);
             this.SCC.TabIndex = 9;
@@ -603,7 +658,7 @@ namespace ArduinoLocomotiveController
             // 
             this.SCing.AutoSize = true;
             this.SCing.Font = new System.Drawing.Font("等线", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.SCing.Location = new System.Drawing.Point(546, 672);
+            this.SCing.Location = new System.Drawing.Point(546, 675);
             this.SCing.Name = "SCing";
             this.SCing.Size = new System.Drawing.Size(198, 33);
             this.SCing.TabIndex = 10;
@@ -642,7 +697,7 @@ namespace ArduinoLocomotiveController
             this.PowerNum.ReadOnly = true;
             this.PowerNum.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.PowerNum.ShortcutsEnabled = false;
-            this.PowerNum.Size = new System.Drawing.Size(104, 136);
+            this.PowerNum.Size = new System.Drawing.Size(106, 136);
             this.PowerNum.TabIndex = 12;
             this.PowerNum.TabStop = false;
             this.PowerNum.Text = "8";
@@ -653,18 +708,101 @@ namespace ArduinoLocomotiveController
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("等线", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(587, 397);
+            this.label1.Location = new System.Drawing.Point(587, 400);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 22);
             this.label1.TabIndex = 13;
             this.label1.Text = "Power Level";
             // 
-            // panel1
+            // PowerLock
             // 
-            this.panel1.Location = new System.Drawing.Point(176, 244);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(12, 139);
-            this.panel1.TabIndex = 14;
+            this.PowerLock.AutoSize = true;
+            this.PowerLock.BackColor = System.Drawing.Color.Red;
+            this.PowerLock.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.PowerLock.ForeColor = System.Drawing.Color.Yellow;
+            this.PowerLock.Location = new System.Drawing.Point(388, 220);
+            this.PowerLock.Name = "PowerLock";
+            this.PowerLock.Padding = new System.Windows.Forms.Padding(0, 4, 0, 3);
+            this.PowerLock.Size = new System.Drawing.Size(69, 32);
+            this.PowerLock.TabIndex = 16;
+            this.PowerLock.Text = "LOCK";
+            this.PowerLock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DirectionLock
+            // 
+            this.DirectionLock.AutoSize = true;
+            this.DirectionLock.BackColor = System.Drawing.Color.Green;
+            this.DirectionLock.Font = new System.Drawing.Font("等线", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DirectionLock.ForeColor = System.Drawing.Color.Yellow;
+            this.DirectionLock.Location = new System.Drawing.Point(41, 29);
+            this.DirectionLock.Name = "DirectionLock";
+            this.DirectionLock.Padding = new System.Windows.Forms.Padding(0, 4, 0, 3);
+            this.DirectionLock.Size = new System.Drawing.Size(153, 32);
+            this.DirectionLock.TabIndex = 17;
+            this.DirectionLock.Text = "Reverser Lock";
+            this.DirectionLock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Direction
+            // 
+            this.Direction.BackColor = System.Drawing.SystemColors.Control;
+            this.Direction.LargeChange = 0;
+            this.Direction.Location = new System.Drawing.Point(92, 66);
+            this.Direction.Maximum = 1;
+            this.Direction.Minimum = -1;
+            this.Direction.Name = "Direction";
+            this.Direction.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.Direction.Size = new System.Drawing.Size(45, 341);
+            this.Direction.TabIndex = 0;
+            this.Direction.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.Direction.Scroll += new System.EventHandler(this.Direction_Scroll);
+            this.Direction.Enter += new System.EventHandler(this.Direction_Enter);
+            this.Direction.Leave += new System.EventHandler(this.Direction_Leave);
+            // 
+            // Power
+            // 
+            this.Power.BackColor = System.Drawing.SystemColors.Control;
+            this.Power.LargeChange = 0;
+            this.Power.Location = new System.Drawing.Point(287, 66);
+            this.Power.Maximum = 5;
+            this.Power.Minimum = -5;
+            this.Power.Name = "Power";
+            this.Power.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.Power.Size = new System.Drawing.Size(45, 341);
+            this.Power.TabIndex = 1;
+            this.Power.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.Power.Scroll += new System.EventHandler(this.Power_Scroll);
+            this.Power.Enter += new System.EventHandler(this.Power_Enter);
+            this.Power.Leave += new System.EventHandler(this.Power_Leave);
+            // 
+            // AutoBrake
+            // 
+            this.AutoBrake.BackColor = System.Drawing.SystemColors.Control;
+            this.AutoBrake.LargeChange = 0;
+            this.AutoBrake.Location = new System.Drawing.Point(172, 66);
+            this.AutoBrake.Maximum = 2;
+            this.AutoBrake.Name = "AutoBrake";
+            this.AutoBrake.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.AutoBrake.Size = new System.Drawing.Size(45, 341);
+            this.AutoBrake.TabIndex = 2;
+            this.AutoBrake.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.AutoBrake.Scroll += new System.EventHandler(this.AutoBrake_Scroll);
+            this.AutoBrake.Enter += new System.EventHandler(this.AutoBrake_Enter);
+            this.AutoBrake.Leave += new System.EventHandler(this.AutoBrake_Leave);
+            // 
+            // IndeBrake
+            // 
+            this.IndeBrake.BackColor = System.Drawing.SystemColors.Control;
+            this.IndeBrake.LargeChange = 0;
+            this.IndeBrake.Location = new System.Drawing.Point(239, 66);
+            this.IndeBrake.Maximum = 2;
+            this.IndeBrake.Name = "IndeBrake";
+            this.IndeBrake.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.IndeBrake.Size = new System.Drawing.Size(45, 341);
+            this.IndeBrake.TabIndex = 3;
+            this.IndeBrake.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.IndeBrake.Scroll += new System.EventHandler(this.IndeBrake_Scroll);
+            this.IndeBrake.Enter += new System.EventHandler(this.IndeBrake_Enter);
+            this.IndeBrake.Leave += new System.EventHandler(this.IndeBrake_Leave);
             // 
             // ControlPanel
             // 
@@ -683,16 +821,18 @@ namespace ArduinoLocomotiveController
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ControlPanel";
+            this.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Locomotive Controller";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControlPanel_FormClosing);
             this.Load += new System.EventHandler(this.ControlPanel_Load);
             this.Shown += new System.EventHandler(this.ControlPanel_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Direction)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Power)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Direction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Power)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AutoBrake)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndeBrake)).EndInit();
             this.ResumeLayout(false);
@@ -714,8 +854,8 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.Label NeutralR;
         private System.Windows.Forms.Label NeutralL;
         private System.Windows.Forms.Label ForwardR;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label LblInde;
+        private System.Windows.Forms.Label LblAuto;
         private System.Windows.Forms.Label IFull;
         private System.Windows.Forms.Label AFull;
         private System.Windows.Forms.Label IHalf;
@@ -745,7 +885,18 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.RichTextBox SCC_Cover;
         private System.Windows.Forms.RichTextBox PowerNum;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel AHL;
+        private System.Windows.Forms.Panel AFR;
+        private System.Windows.Forms.Panel AHR;
+        private System.Windows.Forms.Panel AFL;
+        private System.Windows.Forms.Panel IFR;
+        private System.Windows.Forms.Panel IHR;
+        private System.Windows.Forms.Panel IFL;
+        private System.Windows.Forms.Panel IHL;
+        private System.Windows.Forms.Label IndeApp;
+        private System.Windows.Forms.Label AutoApp;
+        private System.Windows.Forms.Label PowerLock;
+        private System.Windows.Forms.Label DirectionLock;
     }
 }
 

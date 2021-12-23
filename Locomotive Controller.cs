@@ -18,6 +18,10 @@ namespace ArduinoLocomotiveController
         //bool ReverserLock = false;  //False = Unlocked, True = Locked
         bool PantagraphState = false;   //False = Lower, True = Upper
         bool SCC_NeedHide = false;
+        bool AutoFlashFirstTime = true;
+        bool IndeFlashFirstTime = true;
+
+        #region FontBind
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -41,9 +45,12 @@ namespace ArduinoLocomotiveController
             DigitalFont = new Font(fonts.Families[0], 75.0F, FontStyle.Italic);
         }
 
+        #endregion
+
         private void ControlPanel_Load(object sender, EventArgs e)
         {
             PowerNum.Font = DigitalFont;
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         #region SCA
@@ -52,66 +59,119 @@ namespace ArduinoLocomotiveController
         {
             DirectionActivibility.ForeColor = Color.Black;
             Application.DoEvents();
+            //
+            //111
+            //
             Thread.Sleep(500);
             Direction.BackColor = Color.DarkOrange;
             PowerNum.Text = "1";
             Application.DoEvents();
+            //
+            //222
+            //
             Thread.Sleep(250);
             Direction.BackColor = SystemColors.Control;
             Power.BackColor = Color.OliveDrab;
             PowerNum.Text = "2";
             Application.DoEvents();
+            //
+            //333
+            //
             Thread.Sleep(250);
             Power.BackColor = SystemColors.Control;
-            AutoBrake.BackColor = Color.Red;
+            //AutoBrake.BackColor = Color.Red;
+            AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = Color.Red;
             PowerNum.Text = "3";
             Application.DoEvents();
+            //
+            //444
+            //
             Thread.Sleep(250);
-            AutoBrake.BackColor = SystemColors.Control;
-            IndeBrake.BackColor = Color.DarkMagenta;
+            //AutoBrake.BackColor = SystemColors.Control;
+            //IndeBrake.BackColor = Color.DarkMagenta;
+            AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = SystemColors.Control;
+            IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = Color.DarkMagenta;
             PowerNum.Text = "4";
             Application.DoEvents();
+            //
+            //555
+            //
             Thread.Sleep(250);
-            IndeBrake.BackColor = SystemColors.Control;
+            //IndeBrake.BackColor = SystemColors.Control;
             Direction.BackColor = Color.DarkOrange;
+            IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
             PowerNum.Text = "5";
             Application.DoEvents();
+            //
+            //666
+            //
             Thread.Sleep(250);
             Direction.BackColor = SystemColors.Control;
             Power.BackColor = Color.OliveDrab;
             PowerNum.Text = "6";
             Application.DoEvents();
+            //
+            //777
+            //
             Thread.Sleep(250);
             Power.BackColor = SystemColors.Control;
-            AutoBrake.BackColor = Color.Red;
+            //AutoBrake.BackColor = Color.Red;
+            AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = Color.Red;
             PowerNum.Text = "7";
             Application.DoEvents();
+            //
+            //888
+            //
             Thread.Sleep(250);
-            AutoBrake.BackColor = SystemColors.Control;
-            IndeBrake.BackColor = Color.DarkMagenta;
+            //AutoBrake.BackColor = SystemColors.Control;
+            //IndeBrake.BackColor = Color.DarkMagenta;
+            AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = SystemColors.Control;
+            IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = Color.DarkMagenta;
             PowerNum.Text = "8";
             Application.DoEvents();
+            //
+            //Clean Up
+            //
             Thread.Sleep(250);
-            IndeBrake.BackColor = SystemColors.Control;
+            //IndeBrake.BackColor = SystemColors.Control;
+            IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
+            Application.DoEvents();
+            //
+            //Flash Show
+            //
             Thread.Sleep(250);
             Direction.BackColor = Color.DarkOrange;
             Power.BackColor = Color.OliveDrab;
-            AutoBrake.BackColor = Color.Red;
-            IndeBrake.BackColor = Color.DarkMagenta;
+            //AutoBrake.BackColor = Color.Red;
+            //IndeBrake.BackColor = Color.DarkMagenta;
+            AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = Color.Red;
+            IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = Color.DarkMagenta;
             PowerNum.Text = "";
             Application.DoEvents();
+            //
+            //Flash Hide
+            //
             Thread.Sleep(500);
             Direction.BackColor = SystemColors.Control;
             Power.BackColor = SystemColors.Control;
-            AutoBrake.BackColor = SystemColors.Control;
-            IndeBrake.BackColor = SystemColors.Control;
+            //AutoBrake.BackColor = SystemColors.Control;
+            //IndeBrake.BackColor = SystemColors.Control;
+            AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = SystemColors.Control;
+            IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
             PowerNum.Text = "8";
+            AutoApp.Visible = IndeApp.Visible = false;
+            PowerLock.Visible = false;
+            DirectionLock.Visible = false;
             Application.DoEvents();
+            //
+            //SCC
+            //
             SCing_Hide();
             NeutralL.BackColor = NeutralR.BackColor = Color.Yellow;
             IDLE.BackColor = Color.SpringGreen;
             Direction_Enter(sender, e);
             PowerNum.Text = "0";
+            PowerLock.Visible = true;
             Power.Enabled = false;
             Application.DoEvents();
         }
@@ -178,7 +238,7 @@ namespace ArduinoLocomotiveController
 
         private void Direction_Scroll(object sender, EventArgs e)
          {
-            #region Label Color Change
+            #region dBar Label Color Change
 
             switch (Direction.Value)
             {
@@ -218,10 +278,12 @@ namespace ArduinoLocomotiveController
             if (Direction.Value != 0)
             {
                 Power.Enabled = true;
+                PowerLock.Visible = false;
             }
             else
             {
                 Power.Enabled = false;
+                PowerLock.Visible = true;
             }
 
             #endregion
@@ -364,22 +426,25 @@ namespace ArduinoLocomotiveController
 
             #endregion
 
-            #region ReverserLock & pBar/pNum Color Change
+            #region dBar Lock & pBar/pNum Color Change
 
             switch (Power.Value)
             {
                 case var expression when Power.Value > 0:
                     Direction.Enabled = false;
+                    DirectionLock.Visible = true;
                     Power.BackColor = Color.DarkOliveGreen;
                     PowerNum.ForeColor = Color.LimeGreen;
                     break;
                 case 0:
                     Direction.Enabled = true;
+                    DirectionLock.Visible = false;
                     Power.BackColor = SystemColors.Control;
                     PowerNum.ForeColor = SystemColors.Info;
                     break;
                 case var expression when Power.Value < 0:
                     Direction.Enabled = false;
+                    DirectionLock.Visible = true;
                     Power.BackColor = Color.DarkGoldenrod;
                     PowerNum.ForeColor = Color.Gold;
                     break;
@@ -421,17 +486,239 @@ namespace ArduinoLocomotiveController
 
         private void AutoBrake_Scroll(object sender, EventArgs e)
         {
+            #region BrakeLevel Indicator
 
+            switch (AutoBrake.Value)
+            {
+                case 0:
+                    AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = SystemColors.Control;
+                    AutoApp.Visible = false;
+                    break;
+                case 1:
+                    AHL.BackColor = AHR.BackColor = Color.Red;
+                    AFL.BackColor = AFR.BackColor = SystemColors.Control;
+                    AutoApp.Visible = true;
+                    AFL.Size = new Size(13, 139);
+                    AFR.Size = new Size(14, 139);
+                    break;
+                case 2:
+                    AHL.BackColor = AHR.BackColor = Color.Red;
+                    AFL.BackColor = AFR.BackColor = Color.Red;
+                    AutoApp.Visible = true;
+                    //AFL.Size.Height = AFR.Size.Height = 159;
+                    AFL.Size = new Size(13, 159);
+                    AFR.Size = new Size(14, 159);
+                    break;
+            }
+
+            #endregion
+
+            #region AutoFlash
+
+            //bool AFStopCode = false;
+            ThreadStart threadStart = new ThreadStart(BrakeFlash);
+            Thread BrakeFlashThread = new Thread(threadStart);
+            //Thread AutoFlashThread = new Thread(() =>
+            //{
+                //for (int i = 0; i < 2; i++)
+                //{
+                //    if (AutoBrake.InvokeRequired)
+                //    {
+                //        AutoBrake.Invoke(new Action<TrackBarNoBorder, int>(SetABValue), AutoBrake, i);
+                //    }
+                //    else
+                //    {
+                //        AutoBrake.Value = i;
+                //    }
+                //}
+
+                //if (AutoBrake.Value != 0)
+                //{
+                //    AFStopCode = false;
+                //}
+                //else if (AutoBrake.Value == 0)
+                //{
+                //    AFStopCode = true;
+                //}
+            //});
+
+            //AutoFlashThread.Priority = ThreadPriority.Highest;
+            if (AutoBrake.Value != 0)
+            {
+                if (AutoFlashFirstTime == true)
+                {
+                    BrakeFlashThread.Start();
+                    AutoFlashFirstTime = false;
+                }
+            }
+            else if (AutoBrake.Value == 0)
+            {
+                //while (AutoFlashThread.ThreadState != ThreadState.Stopped)
+                //{
+                //    AutoFlashThread.Abort();
+                //}
+                AutoFlashFirstTime = true;
+                LblAuto.ForeColor = Color.Black;
+                BrakeFlashThread.Start();
+            }
+
+            #endregion
         }
+
+        #region AutoFlashFunction
+
+        public void AutoFlash()
+        {
+            while (AutoBrake.Value != 0)
+            {
+                //if (AutoBrake.InvokeRequired)
+                //{
+                //    Action<int> action = new Action<int>(AutoFlash);
+                //    Invoke(action, new object[] { ABValue });
+                //}
+                //else
+                //{
+                //    AutoBrake.Value = ABValue;
+                //}
+                
+
+                //if (AutoBrake.Value != 0)
+                //{
+                    LblAuto.ForeColor = Color.Red;
+                    Thread.Sleep(500);
+                    LblAuto.ForeColor = Color.Black;
+                    Thread.Sleep(500);
+                //}
+                //else
+                //{
+                //LblAuto.ForeColor = Color.Black;
+                //break;
+                //}
+            }
+            //LblAuto.ForeColor = Color.Black;
+        }
+
+        //private void SetABValue(TrackBarNoBorder tBar, int value)
+        //{
+        //    tBar.Value = value;
+        //}
+
+        #endregion
 
         private void IndeBrake_Scroll(object sender, EventArgs e)
         {
+            #region BrakeLevel Indicator
 
+            switch (IndeBrake.Value)
+            {
+                case 0:
+                    IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
+                    IndeApp.Visible = false;
+                    break;
+                case 1:
+                    IHL.BackColor = IHR.BackColor = Color.Red;
+                    IFL.BackColor = IFR.BackColor = SystemColors.Control;
+                    IndeApp.Visible = true;
+                    IFL.Size = new Size(13, 139);
+                    IFR.Size = new Size(14, 139);
+                    break;
+                case 2:
+                    IHL.BackColor = IHR.BackColor = Color.Red;
+                    IFL.BackColor = IFR.BackColor = Color.Red;
+                    IndeApp.Visible = true;
+                    //IFL.Size.Height = IFR.Size.Height = 159;
+                    IFL.Size = new Size(13, 159);
+                    IFR.Size = new Size(14, 159);
+                    break;
+            }
+
+            #endregion
+
+            #region IndeFlash
+
+            ThreadStart threadStart = new ThreadStart(BrakeFlash);
+            Thread BrakeFlashThread = new Thread(threadStart);
+            if (IndeBrake.Value != 0)
+            {
+                if (IndeFlashFirstTime == true)
+                {
+                    BrakeFlashThread.Start();
+                    IndeFlashFirstTime = false;
+                }
+            }
+            else if (IndeBrake.Value == 0)
+            {
+                IndeFlashFirstTime = true;
+                LblInde.ForeColor = Color.Black;
+                BrakeFlashThread.Start();
+            }
+            #endregion
         }
+
+        #region IndeFlashFunction
+
+        public void IndeFlash()
+        {
+            while (IndeBrake.Value != 0)
+            {
+                LblInde.ForeColor = Color.Red;
+                Thread.Sleep(500);
+                LblInde.ForeColor = Color.Black;
+                Thread.Sleep(500);
+            }
+        }
+
+        #endregion
+
+        #region Disable Mouse Pointer
 
         private void PowerNum_Enter(object sender, EventArgs e)
         {
-            Power.Focus();
+            if (Power.Enabled == false)
+            {
+                Direction.Focus();
+            }
+            else
+            {
+                Power.Focus();
+            }
+        }
+
+        #endregion
+
+        public void BrakeFlash()
+        {
+            while (AutoBrake.Value != 0 & IndeBrake.Value == 0)
+            {
+                LblAuto.ForeColor = Color.Red;
+                Thread.Sleep(500);
+                LblAuto.ForeColor = Color.Black;
+                Thread.Sleep(500);
+            }
+
+            while (AutoBrake.Value == 0 & IndeBrake.Value != 0)
+            {
+                LblInde.ForeColor = Color.Red;
+                Thread.Sleep(500);
+                LblInde.ForeColor = Color.Black;
+                Thread.Sleep(500);
+            }
+
+            while (AutoBrake.Value != 0 & IndeBrake.Value != 0)
+            {
+                LblAuto.ForeColor = Color.Red;
+                LblInde.ForeColor = Color.Red;
+                Thread.Sleep(500);
+                LblAuto.ForeColor = Color.Black;
+                LblInde.ForeColor = Color.Black;
+                Thread.Sleep(500);
+            }
+        }
+
+        private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            AutoBrake.Value = 0;
+            IndeBrake.Value = 0;
         }
     }
 }
