@@ -11,7 +11,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Drawing.Text;
 using System.Reflection;
-using System.IO;
+using System.IO.Ports;
 
 #endregion
 
@@ -58,9 +58,21 @@ namespace ArduinoLocomotiveController
 
             #region Arduino Support Initialization
 
-            string[] Baud = { "9600", "115200" };
-            PortList.Items.AddRange(System.IO.Ports.SerialPort.GetPortNames());
+            try
+            {
+                string[] Ports = SerialPort.GetPortNames();
+                PortList.Items.AddRange(Ports);
+                PortList.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("您未插入任何设备！");
+            }
+
+            string[] Baud = { "9600", "19200", "38400", "57600", "115200" };
             BaudList.Items.AddRange(Baud);
+            BaudList.SelectedIndex = 0;
+            serialPort.BaudRate = 9600;
 
             #endregion
         }
@@ -583,7 +595,7 @@ namespace ArduinoLocomotiveController
             #endregion
         }
 
-        //#region AutoFlashFunction
+        #region AutoFlashFunction
 
         //public void AutoFlash()
         //{
@@ -621,7 +633,7 @@ namespace ArduinoLocomotiveController
         ////    tBar.Value = value;
         ////}
 
-        //#endregion
+        #endregion
 
         private void IndeBrake_Scroll(object sender, EventArgs e)
         {
@@ -673,7 +685,7 @@ namespace ArduinoLocomotiveController
             #endregion
         }
 
-        //#region IndeFlashFunction
+        #region IndeFlashFunction
 
         //public void IndeFlash()
         //{
@@ -686,7 +698,7 @@ namespace ArduinoLocomotiveController
         //    }
         //}
 
-        //#endregion
+        #endregion
 
         #region BrakeFlash Function
 
