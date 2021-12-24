@@ -23,5 +23,17 @@ namespace ArduinoLocomotiveController
             base.OnGotFocus(e);
             SendMessage(this.Handle, 0x0128, MakeParam(1, 0x1), 0);
         }
+
+        protected override void OnBackColorChanged(EventArgs e)
+        {
+            base.OnBackColorChanged(e);
+            SendMessage(this.Handle, 0x0128, MakeParam(1, 0x1), 0);
+        }
+
+        protected override void OnValueChanged(EventArgs e)
+        {
+            base.OnValueChanged(e);
+            SendMessage(this.Handle, 0x0128, MakeParam(1, 0x1), 0);
+        }
     }
 }

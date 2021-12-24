@@ -21,17 +21,6 @@ namespace ArduinoLocomotiveController
             base.Dispose(disposing);
         }
 
-        class CustomTBar : System.Windows.Forms.TrackBar
-        {
-            protected override bool ShowFocusCues
-            {
-                get
-                {
-                    return false;
-                }
-            }
-        }
-
         #region Windows 窗体设计器生成的代码
 
         /// <summary>
@@ -97,17 +86,20 @@ namespace ArduinoLocomotiveController
             this.SCing = new System.Windows.Forms.Label();
             this.SCC_Cover = new System.Windows.Forms.RichTextBox();
             this.PowerNum = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LblPowerLevel = new System.Windows.Forms.Label();
             this.BaudList = new System.Windows.Forms.ComboBox();
             this.PortList = new System.Windows.Forms.ComboBox();
             this.LinkStart = new System.Windows.Forms.Button();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.EBrake = new System.Windows.Forms.PictureBox();
+            this.LblCE = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Direction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Power)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoBrake)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndeBrake)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EBrake)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -192,6 +184,7 @@ namespace ArduinoLocomotiveController
             this.PowerActivibility.TabStop = false;
             this.PowerActivibility.Text = "Active";
             this.PowerActivibility.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.PowerActivibility.Click += new System.EventHandler(this.PowerActivibility_Click);
             // 
             // DirectionActivibility
             // 
@@ -209,6 +202,7 @@ namespace ArduinoLocomotiveController
             this.DirectionActivibility.TabStop = false;
             this.DirectionActivibility.Text = "Active";
             this.DirectionActivibility.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DirectionActivibility.Click += new System.EventHandler(this.DirectionActivibility_Click);
             // 
             // B1
             // 
@@ -607,6 +601,7 @@ namespace ArduinoLocomotiveController
             this.IndeActivibility.TabStop = false;
             this.IndeActivibility.Text = "Active";
             this.IndeActivibility.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.IndeActivibility.Click += new System.EventHandler(this.IndeActivibility_Click);
             // 
             // AutoActivibility
             // 
@@ -624,6 +619,7 @@ namespace ArduinoLocomotiveController
             this.AutoActivibility.TabStop = false;
             this.AutoActivibility.Text = "Active";
             this.AutoActivibility.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.AutoActivibility.Click += new System.EventHandler(this.AutoActivibility_Click);
             // 
             // LblInde
             // 
@@ -799,15 +795,15 @@ namespace ArduinoLocomotiveController
             this.PowerNum.WordWrap = false;
             this.PowerNum.Enter += new System.EventHandler(this.PowerNum_Enter);
             // 
-            // label1
+            // LblPowerLevel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("等线", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(587, 400);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 22);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Power Level";
+            this.LblPowerLevel.AutoSize = true;
+            this.LblPowerLevel.Font = new System.Drawing.Font("等线", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LblPowerLevel.Location = new System.Drawing.Point(587, 400);
+            this.LblPowerLevel.Name = "LblPowerLevel";
+            this.LblPowerLevel.Size = new System.Drawing.Size(120, 22);
+            this.LblPowerLevel.TabIndex = 13;
+            this.LblPowerLevel.Text = "Power Level";
             // 
             // BaudList
             // 
@@ -838,16 +834,54 @@ namespace ArduinoLocomotiveController
             this.LinkStart.TabStop = false;
             this.LinkStart.Text = "Connect";
             this.LinkStart.UseVisualStyleBackColor = true;
+            this.LinkStart.Click += new System.EventHandler(this.LinkStart_Click);
+            // 
+            // serialPort
+            // 
+            this.serialPort.ReadTimeout = 2000;
+            this.serialPort.WriteTimeout = 2000;
+            // 
+            // EBrake
+            // 
+            this.EBrake.BackColor = System.Drawing.SystemColors.Control;
+            this.EBrake.Enabled = false;
+            this.EBrake.ErrorImage = null;
+            this.EBrake.Image = ((System.Drawing.Image)(resources.GetObject("EBrake.Image")));
+            this.EBrake.InitialImage = ((System.Drawing.Image)(resources.GetObject("EBrake.InitialImage")));
+            this.EBrake.Location = new System.Drawing.Point(552, 481);
+            this.EBrake.Name = "EBrake";
+            this.EBrake.Size = new System.Drawing.Size(188, 143);
+            this.EBrake.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.EBrake.TabIndex = 17;
+            this.EBrake.TabStop = false;
+            this.EBrake.WaitOnLoad = true;
+            this.EBrake.Click += new System.EventHandler(this.EBrake_Click);
+            // 
+            // LblCE
+            // 
+            this.LblCE.AutoSize = true;
+            this.LblCE.BackColor = System.Drawing.Color.Orange;
+            this.LblCE.Font = new System.Drawing.Font("等线", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LblCE.Location = new System.Drawing.Point(474, 670);
+            this.LblCE.Name = "LblCE";
+            this.LblCE.Padding = new System.Windows.Forms.Padding(3);
+            this.LblCE.Size = new System.Drawing.Size(339, 39);
+            this.LblCE.TabIndex = 18;
+            this.LblCE.Text = "Connection Established";
+            this.LblCE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblCE.Visible = false;
             // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1284, 711);
+            this.Controls.Add(this.LblCE);
+            this.Controls.Add(this.EBrake);
             this.Controls.Add(this.LinkStart);
             this.Controls.Add(this.PortList);
             this.Controls.Add(this.BaudList);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LblPowerLevel);
             this.Controls.Add(this.PowerNum);
             this.Controls.Add(this.SCing);
             this.Controls.Add(this.groupBox1);
@@ -873,6 +907,7 @@ namespace ArduinoLocomotiveController
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoBrake)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndeBrake)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EBrake)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -881,6 +916,8 @@ namespace ArduinoLocomotiveController
         #endregion
         private TrackBarNoBorder Direction;
         private TrackBarNoBorder Power;
+        private TrackBarNoBorder AutoBrake;
+        private TrackBarNoBorder IndeBrake;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label ForwardL;
@@ -902,11 +939,11 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.Label ARelease;
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Panel P1;
         private System.Windows.Forms.Panel P5;
         private System.Windows.Forms.Panel P4;
         private System.Windows.Forms.Panel P3;
         private System.Windows.Forms.Panel P2;
+        private System.Windows.Forms.Panel P1;
         private System.Windows.Forms.Panel B1;
         private System.Windows.Forms.Panel B2;
         private System.Windows.Forms.Panel B3;
@@ -917,12 +954,10 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.TextBox PowerActivibility;
         private System.Windows.Forms.TextBox IndeActivibility;
         private System.Windows.Forms.TextBox AutoActivibility;
-        private TrackBarNoBorder AutoBrake;
-        private TrackBarNoBorder IndeBrake;
         private System.Windows.Forms.Label SCing;
         private System.Windows.Forms.RichTextBox SCC_Cover;
         private System.Windows.Forms.RichTextBox PowerNum;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LblPowerLevel;
         private System.Windows.Forms.Panel AHL;
         private System.Windows.Forms.Panel AFR;
         private System.Windows.Forms.Panel AHR;
@@ -938,7 +973,9 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.ComboBox BaudList;
         private System.Windows.Forms.ComboBox PortList;
         private System.Windows.Forms.Button LinkStart;
+        private System.Windows.Forms.PictureBox EBrake;
         private System.IO.Ports.SerialPort serialPort;
+        private System.Windows.Forms.Label LblCE;
     }
 }
 

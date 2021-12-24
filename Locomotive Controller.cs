@@ -1,19 +1,17 @@
-﻿#region using
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
+using System.IO.Ports;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Drawing.Text;
-using System.Reflection;
-using System.IO.Ports;
-
-#endregion
+using ArduinoLocomotiveController.Properties;
 
 namespace ArduinoLocomotiveController
 {
@@ -24,29 +22,32 @@ namespace ArduinoLocomotiveController
         bool SCC_NeedHide = false;
         bool AutoFlashFirstTime = true;
         bool IndeFlashFirstTime = true;
+        bool EBrakeStatus = false;
 
         #region FontEmbed
 
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [In] ref uint pcFonts);
 
-        private PrivateFontCollection fonts = new PrivateFontCollection();
+        private readonly PrivateFontCollection fonts = new PrivateFontCollection();
 
-        Font DigitalFont;
+        readonly Font DigitalFont;
+        readonly Font EBrakeFont;
 
         public ControlPanel()
         {
             InitializeComponent();
 
-            byte[] fontData = Properties.Resources.digifaw;
-            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
-            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            byte[] fontData = Resources.digifaw;
+            IntPtr fontPtr = Marshal.AllocCoTaskMem(fontData.Length);
+            Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
             uint dummy = 0;
-            fonts.AddMemoryFont(fontPtr, Properties.Resources.digifaw.Length);
-            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.digifaw.Length, IntPtr.Zero, ref dummy);
-            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+            fonts.AddMemoryFont(fontPtr, Resources.digifaw.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Resources.digifaw.Length, IntPtr.Zero, ref dummy);
+            Marshal.FreeCoTaskMem(fontPtr);
 
             DigitalFont = new Font(fonts.Families[0], 75.0F, FontStyle.Italic);
+            EBrakeFont = new Font(fonts.Families[0], 75.0F, FontStyle.Italic | FontStyle.Underline);
         }
 
         #endregion
@@ -54,7 +55,7 @@ namespace ArduinoLocomotiveController
         private void ControlPanel_Load(object sender, EventArgs e)
         {
             PowerNum.Font = DigitalFont;
-            CheckForIllegalCrossThreadCalls = false;
+            CheckForIllegalCrossThreadCalls = false;    //Unsafe
 
             #region Arduino Support Initialization
 
@@ -82,7 +83,7 @@ namespace ArduinoLocomotiveController
         private void ControlPanel_Shown(object sender, EventArgs e)
         {
             DirectionActivibility.ForeColor = Color.Black;
-            PortList.Enabled = BaudList.Enabled = false;
+            PortList.Enabled = BaudList.Enabled = LinkStart.Enabled = EBrake.Enabled  = Power.Enabled = false;
             Application.DoEvents();
             //
             //111
@@ -201,7 +202,7 @@ namespace ArduinoLocomotiveController
             PowerLock.Visible = true;
             Power.Enabled = false;
             Application.DoEvents();
-            PortList.Enabled = BaudList.Enabled = true;
+            PortList.Enabled = BaudList.Enabled = LinkStart.Enabled = EBrake.Enabled = true;
         }
 
         private void SCing_Hide()
@@ -210,6 +211,17 @@ namespace ArduinoLocomotiveController
             SCC_Cover.Visible = false;
             SCC_NeedHide = true;
             Application.DoEvents();
+        }
+
+        #endregion
+
+        #region Connection Establishied
+
+        public void ConnectionVerified()
+        {
+            LblCE.Visible = true;
+            Thread.Sleep(3000);
+            LblCE.Visible = false;
         }
 
         #endregion
@@ -460,7 +472,7 @@ namespace ArduinoLocomotiveController
 
             switch (Power.Value)
             {
-                case var expression when Power.Value > 0:
+                case var _ when Power.Value > 0:
                     Direction.Enabled = false;
                     DirectionLock.Visible = true;
                     Power.BackColor = Color.DarkOliveGreen;
@@ -472,7 +484,7 @@ namespace ArduinoLocomotiveController
                     Power.BackColor = SystemColors.Control;
                     PowerNum.ForeColor = SystemColors.Info;
                     break;
-                case var expression when Power.Value < 0:
+                case var _ when Power.Value < 0:
                     Direction.Enabled = false;
                     DirectionLock.Visible = true;
                     Power.BackColor = Color.DarkGoldenrod;
@@ -535,7 +547,6 @@ namespace ArduinoLocomotiveController
                     AHL.BackColor = AHR.BackColor = Color.Red;
                     AFL.BackColor = AFR.BackColor = Color.Red;
                     AutoApp.Visible = true;
-                    //AFL.Size.Height = AFR.Size.Height = 159;
                     AFL.Size = new Size(13, 159);
                     AFR.Size = new Size(14, 159);
                     break;
@@ -595,7 +606,7 @@ namespace ArduinoLocomotiveController
             #endregion
         }
 
-        #region AutoFlashFunction
+        #region _! Deprecated !_ AutoFlashFunction
 
         //public void AutoFlash()
         //{
@@ -610,7 +621,7 @@ namespace ArduinoLocomotiveController
         //        //{
         //        //    AutoBrake.Value = ABValue;
         //        //}
-                
+
 
         //        //if (AutoBrake.Value != 0)
         //        //{
@@ -656,7 +667,6 @@ namespace ArduinoLocomotiveController
                     IHL.BackColor = IHR.BackColor = Color.DarkMagenta;
                     IFL.BackColor = IFR.BackColor = Color.DarkMagenta;
                     IndeApp.Visible = true;
-                    //IFL.Size.Height = IFR.Size.Height = 159;
                     IFL.Size = new Size(13, 159);
                     IFR.Size = new Size(14, 159);
                     break;
@@ -685,7 +695,7 @@ namespace ArduinoLocomotiveController
             #endregion
         }
 
-        #region IndeFlashFunction
+        #region _! Deprecated !_ IndeFlashFunction
 
         //public void IndeFlash()
         //{
@@ -733,10 +743,11 @@ namespace ArduinoLocomotiveController
 
         #endregion
 
-        #region Disable Mouse Pointer
+        #region Avoid Focus
 
         private void PowerNum_Enter(object sender, EventArgs e)
         {
+            #region Disable Mouse Pointer Focus for PowerNum
             if (Power.Enabled == false)
             {
                 Direction.Focus();
@@ -745,14 +756,132 @@ namespace ArduinoLocomotiveController
             {
                 Power.Focus();
             }
+            #endregion
+        }
+
+        private void DirectionActivibility_Click(object sender, EventArgs e)
+        {
+            Direction.Focus();
+        }
+
+        private void PowerActivibility_Click(object sender, EventArgs e)
+        {
+            #region Power.Focus();
+
+            if (Power.Enabled == false)
+            {
+                Direction.Focus();
+            }
+            else
+            {
+                Power.Focus();
+            }
+
+            #endregion
+        }
+
+        private void AutoActivibility_Click(object sender, EventArgs e)
+        {
+            AutoBrake.Focus();
+        }
+
+        private void IndeActivibility_Click(object sender, EventArgs e)
+        {
+            IndeBrake.Focus();
         }
 
         #endregion
+
+        private void EBrake_Click(object sender, EventArgs e)
+        {
+            if (EBrakeStatus == false)
+            {
+                AutoBrake.Value = IndeBrake.Value = 2;
+                Power.Value = 0;
+                AutoBrake_Scroll(sender, e);
+                IndeBrake_Scroll(sender, e);
+                Direction.Value = 0;
+                Direction_Scroll(sender, e);
+                Power_Scroll(sender, e);
+                PowerNum.Font = EBrakeFont;
+                PowerNum.ForeColor = Color.Red;
+                Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = false;
+                EBrake.Image = Resources.EB_Reset;
+                EBrakeStatus = true;
+                Thread.Sleep(100);
+            }
+            else if (EBrakeStatus == true)
+            {
+                AutoBrake.Value = IndeBrake.Value = 0;
+                AutoBrake_Scroll(sender, e);
+                IndeBrake_Scroll(sender, e);
+                PowerNum.Font = DigitalFont;
+                PowerNum.ForeColor = SystemColors.Info;
+                Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = true;
+                EBrake.Image = Resources.EB_Applied;
+                EBrakeStatus = false;
+            }
+        }
 
         private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)
         {
             AutoBrake.Value = 0;
             IndeBrake.Value = 0;
         }
+
+        #region serialPort Connect & Disconnect & Connection Verification
+
+        private void LinkStart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort.IsOpen)
+                {
+                    serialPort.Close();
+                    LinkStart.Text = "Connect";
+                    PortList.Enabled = true;
+                    BaudList.Enabled = true;
+                }
+                else
+                {
+                    PortList.Enabled = false;
+                    BaudList.Enabled = false;
+                    serialPort.PortName = PortList.Text;
+                    serialPort.BaudRate = Convert.ToInt32 (BaudList.Text);
+                    serialPort.Open();
+                    LinkStart.Text = "Disconnect";
+                }
+            }
+            catch (Exception ex)
+            {
+                serialPort.Close();
+                PortList.Items.Clear();
+                PortList.Items.AddRange(SerialPort.GetPortNames());
+                LinkStart.Text = "Connect";
+                MessageBox.Show(ex.Message);
+                PortList.Enabled = true;
+                BaudList.Enabled = true;
+            }
+
+            string CV = serialPort.ReadExisting();
+            if (CV.Contains("PING"))
+            {
+                ThreadStart threadStart = new ThreadStart(ConnectionVerified);
+                Thread CVThread = new Thread(threadStart);
+                CVThread.Start();
+            }
+            else
+            {
+                serialPort.Close();
+                PortList.Items.Clear();
+                PortList.Items.AddRange(SerialPort.GetPortNames());
+                LinkStart.Text = "Connect";
+                PortList.Enabled = true;
+                BaudList.Enabled = true;
+            }
+        }
+
+        #endregion
+
     }
 }
