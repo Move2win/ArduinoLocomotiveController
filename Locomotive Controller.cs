@@ -18,10 +18,11 @@ namespace ArduinoLocomotiveController
     public partial class ControlPanel : Form
     {
         //bool ReverserLock = false;  //False = Unlocked, True = Locked
-        bool PantagraphState = false;   //False = Lower, True = Upper
+        bool IsPluggedin = true;
+        bool PantographState = false;   //False = Lower, True = Upper
         bool SCC_NeedHide = false;
-        bool AutoFlashFirstTime = true;
-        bool IndeFlashFirstTime = true;
+        bool AutoFlashFirstTime = true;    //Reset Label Color to prepare for next Flash
+        bool IndeFlashFirstTime = true;    //Reset Label Color to prepare for next Flash
         bool EBrakeStatus = false;
 
         #region FontEmbed
@@ -67,7 +68,9 @@ namespace ArduinoLocomotiveController
             }
             catch (Exception)
             {
-                MessageBox.Show("您未插入任何设备！");
+                IsPluggedin = false;
+                LinkStart.Text = "Rescan Device";
+                MessageBox.Show("Commander Arduino Not Detected !");
             }
 
             string[] Baud = { "9600", "19200", "38400", "57600", "115200" };
@@ -84,6 +87,7 @@ namespace ArduinoLocomotiveController
         {
             DirectionActivibility.ForeColor = Color.Black;
             PortList.Enabled = BaudList.Enabled = LinkStart.Enabled = EBrake.Enabled  = Power.Enabled = false;
+            Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = false;
             Application.DoEvents();
             //
             //111
@@ -196,6 +200,7 @@ namespace ArduinoLocomotiveController
             Application.DoEvents();
             NeutralL.BackColor = NeutralR.BackColor = Color.Yellow;
             IDLE.BackColor = Color.SpringGreen;
+            ARelease.BackColor = IRelease.BackColor = Color.Violet;
             Direction_Enter(sender, e);
             Application.DoEvents();
             PowerNum.Text = "0";
@@ -203,6 +208,7 @@ namespace ArduinoLocomotiveController
             Power.Enabled = false;
             Application.DoEvents();
             PortList.Enabled = BaudList.Enabled = LinkStart.Enabled = EBrake.Enabled = true;
+            Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = true;
         }
 
         private void SCing_Hide()
@@ -274,6 +280,204 @@ namespace ArduinoLocomotiveController
         private void IndeBrake_Leave(object sender, EventArgs e)
         {
             IndeActivibility.ForeColor = Color.Black;
+        }
+
+        #endregion
+
+        #region Color Bar Force Focus Brake Bar
+
+        private void AFL_Click(object sender, EventArgs e)
+        {
+            AutoBrake.Focus();
+        }
+
+        private void AFR_Click(object sender, EventArgs e)
+        {
+            AutoBrake.Focus();
+        }
+
+        private void AHL_Click(object sender, EventArgs e)
+        {
+            AutoBrake.Focus();
+        }
+
+        private void AHR_Click(object sender, EventArgs e)
+        {
+            AutoBrake.Focus();
+        }
+
+        private void IFL_Click(object sender, EventArgs e)
+        {
+            IndeBrake.Focus();
+        }
+
+        private void IFR_Click(object sender, EventArgs e)
+        {
+            IndeBrake.Focus();
+        }
+
+        private void IHL_Click(object sender, EventArgs e)
+        {
+            IndeBrake.Focus();
+        }
+
+        private void IHR_Click(object sender, EventArgs e)
+        {
+            IndeBrake.Focus();
+        }
+
+        #endregion
+
+        #region PowerNum & Activibility Labels Avoid Focus
+
+        private void PowerNum_Enter(object sender, EventArgs e)
+        {
+            #region Disable Mouse Pointer Focus for PowerNum
+            if (Power.Enabled == false)
+            {
+                Direction.Focus();
+            }
+            else
+            {
+                Power.Focus();
+            }
+            #endregion
+        }
+
+        private void DirectionActivibility_Click(object sender, EventArgs e)
+        {
+            Direction.Focus();
+        }
+
+        private void PowerActivibility_Click(object sender, EventArgs e)
+        {
+            #region Power.Focus();
+
+            if (Power.Enabled == false)
+            {
+                Direction.Focus();
+            }
+            else
+            {
+                Power.Focus();
+            }
+
+            #endregion
+        }
+
+        private void AutoActivibility_Click(object sender, EventArgs e)
+        {
+            AutoBrake.Focus();
+        }
+
+        private void IndeActivibility_Click(object sender, EventArgs e)
+        {
+            IndeBrake.Focus();
+        }
+
+        #endregion
+
+        #region BrakeFlash Function
+
+        public void BrakeFlash()
+        {
+            while (AutoBrake.Value != 0 & IndeBrake.Value == 0)
+            {
+                LblAuto.ForeColor = Color.Red;
+                Thread.Sleep(500);
+                LblAuto.ForeColor = Color.Black;
+                Thread.Sleep(500);
+            }
+
+            while (AutoBrake.Value == 0 & IndeBrake.Value != 0)
+            {
+                LblInde.ForeColor = Color.Red;
+                Thread.Sleep(500);
+                LblInde.ForeColor = Color.Black;
+                Thread.Sleep(500);
+            }
+
+            while (AutoBrake.Value != 0 & IndeBrake.Value != 0)
+            {
+                LblAuto.ForeColor = Color.Red;
+                LblInde.ForeColor = Color.Red;
+                Thread.Sleep(500);
+                LblAuto.ForeColor = Color.Black;
+                LblInde.ForeColor = Color.Black;
+                Thread.Sleep(500);
+            }
+        }
+
+        #endregion
+
+        #region AIC Protocal & Visual Effect (TODO: Sent message to Arduino)
+
+        public void Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect()
+        {
+            int IndeOutput;
+            if (AutoBrake.Value > IndeBrake.Value)
+            {
+                IndeOutput = AutoBrake.Value;
+            }
+            else
+            {
+                IndeOutput = IndeBrake.Value;
+            }
+
+            ////
+            //// TODO: Sent message to Arduino
+            ////
+            switch (AutoBrake.Value)
+            {
+                case 0:
+                    ARelease.BackColor = Color.Violet;
+                    AHalf.BackColor = SystemColors.ControlLight;
+                    AFull.BackColor = SystemColors.ControlLight;
+                    break;
+                case 1:
+                    ARelease.BackColor = SystemColors.ControlLight;
+                    AHalf.BackColor = Color.Violet;
+                    AFull.BackColor = SystemColors.ControlLight;
+                    break;
+                case 2:
+                    ARelease.BackColor = SystemColors.ControlLight;
+                    AHalf.BackColor = SystemColors.ControlLight;
+                    AFull.BackColor = Color.Violet;
+                    break;
+            }
+
+            switch (IndeOutput)
+            {
+                case 0:
+                    IRelease.BackColor = Color.Violet;
+                    IHalf.BackColor = SystemColors.ControlLight;
+                    IFull.BackColor = SystemColors.ControlLight;
+                    IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
+                    IndeApp.Visible = false;
+                    break;
+                case 1:
+                    IRelease.BackColor = SystemColors.ControlLight;
+                    IHalf.BackColor = Color.Violet;
+                    IFull.BackColor = SystemColors.ControlLight;
+                    IHL.BackColor = IHR.BackColor = Color.DarkMagenta;
+                    IFL.BackColor = IFR.BackColor = SystemColors.Control;
+                    IndeApp.Visible = true;
+                    break;
+                case 2:
+                    IRelease.BackColor = SystemColors.ControlLight;
+                    IHalf.BackColor = SystemColors.ControlLight;
+                    IFull.BackColor = Color.Violet;
+                    IHL.BackColor = IHR.BackColor = Color.DarkMagenta;
+                    IFL.BackColor = IFR.BackColor = Color.DarkMagenta;
+                    IndeApp.Visible = true;
+                    if (IndeBrake.Value != 1)
+                    {
+                        IFL.Size = new Size(13, 159);
+                        IFR.Size = new Size(14, 159);
+                    }
+                    break;
+            }
+            Application.DoEvents();
         }
 
         #endregion
@@ -528,6 +732,8 @@ namespace ArduinoLocomotiveController
 
         private void AutoBrake_Scroll(object sender, EventArgs e)
         {
+            Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect();
+
             #region BrakeLevel Indicator
 
             switch (AutoBrake.Value)
@@ -556,34 +762,8 @@ namespace ArduinoLocomotiveController
 
             #region AutoFlash
 
-            //bool AFStopCode = false;
             ThreadStart threadStart = new ThreadStart(BrakeFlash);
             Thread BrakeFlashThread = new Thread(threadStart);
-            //Thread AutoFlashThread = new Thread(() =>
-            //{
-                //for (int i = 0; i < 2; i++)
-                //{
-                //    if (AutoBrake.InvokeRequired)
-                //    {
-                //        AutoBrake.Invoke(new Action<TrackBarNoBorder, int>(SetABValue), AutoBrake, i);
-                //    }
-                //    else
-                //    {
-                //        AutoBrake.Value = i;
-                //    }
-                //}
-
-                //if (AutoBrake.Value != 0)
-                //{
-                //    AFStopCode = false;
-                //}
-                //else if (AutoBrake.Value == 0)
-                //{
-                //    AFStopCode = true;
-                //}
-            //});
-
-            //AutoFlashThread.Priority = ThreadPriority.Highest;
             if (AutoBrake.Value != 0)
             {
                 if (AutoFlashFirstTime == true)
@@ -594,10 +774,6 @@ namespace ArduinoLocomotiveController
             }
             else if (AutoBrake.Value == 0)
             {
-                //while (AutoFlashThread.ThreadState != ThreadState.Stopped)
-                //{
-                //    AutoFlashThread.Abort();
-                //}
                 AutoFlashFirstTime = true;
                 LblAuto.ForeColor = Color.Black;
                 BrakeFlashThread.Start();
@@ -606,59 +782,27 @@ namespace ArduinoLocomotiveController
             #endregion
         }
 
-        #region _! Deprecated !_ AutoFlashFunction
-
-        //public void AutoFlash()
-        //{
-        //    while (AutoBrake.Value != 0)
-        //    {
-        //        //if (AutoBrake.InvokeRequired)
-        //        //{
-        //        //    Action<int> action = new Action<int>(AutoFlash);
-        //        //    Invoke(action, new object[] { ABValue });
-        //        //}
-        //        //else
-        //        //{
-        //        //    AutoBrake.Value = ABValue;
-        //        //}
-
-
-        //        //if (AutoBrake.Value != 0)
-        //        //{
-        //            LblAuto.ForeColor = Color.Red;
-        //            Thread.Sleep(500);
-        //            LblAuto.ForeColor = Color.Black;
-        //            Thread.Sleep(500);
-        //        //}
-        //        //else
-        //        //{
-        //        //LblAuto.ForeColor = Color.Black;
-        //        //break;
-        //        //}
-        //    }
-        //    //LblAuto.ForeColor = Color.Black;
-        //}
-
-        ////private void SetABValue(TrackBarNoBorder tBar, int value)
-        ////{
-        ////    tBar.Value = value;
-        ////}
-
-        #endregion
-
         private void IndeBrake_Scroll(object sender, EventArgs e)
         {
+            Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect();
+
             #region BrakeLevel Indicator
 
             switch (IndeBrake.Value)
             {
                 case 0:
-                    IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
-                    IndeApp.Visible = false;
+                    if (AutoBrake.Value == 0)
+                    {
+                        IndeApp.Visible = false;
+                        IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
+                    }
                     break;
                 case 1:
+                    if (AutoBrake.Value == 0)
+                    {
+                        IFL.BackColor = IFR.BackColor = SystemColors.Control;
+                    }
                     IHL.BackColor = IHR.BackColor = Color.DarkMagenta;
-                    IFL.BackColor = IFR.BackColor = SystemColors.Control;
                     IndeApp.Visible = true;
                     IFL.Size = new Size(13, 139);
                     IFR.Size = new Size(14, 139);
@@ -684,6 +828,7 @@ namespace ArduinoLocomotiveController
                 {
                     BrakeFlashThread.Start();
                     IndeFlashFirstTime = false;
+                    Thread.Sleep(100);
                 }
             }
             else if (IndeBrake.Value == 0)
@@ -695,108 +840,15 @@ namespace ArduinoLocomotiveController
             #endregion
         }
 
-        #region _! Deprecated !_ IndeFlashFunction
-
-        //public void IndeFlash()
-        //{
-        //    while (IndeBrake.Value != 0)
-        //    {
-        //        LblInde.ForeColor = Color.Red;
-        //        Thread.Sleep(500);
-        //        LblInde.ForeColor = Color.Black;
-        //        Thread.Sleep(500);
-        //    }
-        //}
-
-        #endregion
-
-        #region BrakeFlash Function
-
-        public void BrakeFlash()
-        {
-            while (AutoBrake.Value != 0 & IndeBrake.Value == 0)
-            {
-                LblAuto.ForeColor = Color.Red;
-                Thread.Sleep(500);
-                LblAuto.ForeColor = Color.Black;
-                Thread.Sleep(500);
-            }
-
-            while (AutoBrake.Value == 0 & IndeBrake.Value != 0)
-            {
-                LblInde.ForeColor = Color.Red;
-                Thread.Sleep(500);
-                LblInde.ForeColor = Color.Black;
-                Thread.Sleep(500);
-            }
-
-            while (AutoBrake.Value != 0 & IndeBrake.Value != 0)
-            {
-                LblAuto.ForeColor = Color.Red;
-                LblInde.ForeColor = Color.Red;
-                Thread.Sleep(500);
-                LblAuto.ForeColor = Color.Black;
-                LblInde.ForeColor = Color.Black;
-                Thread.Sleep(500);
-            }
-        }
-
-        #endregion
-
-        #region Avoid Focus
-
-        private void PowerNum_Enter(object sender, EventArgs e)
-        {
-            #region Disable Mouse Pointer Focus for PowerNum
-            if (Power.Enabled == false)
-            {
-                Direction.Focus();
-            }
-            else
-            {
-                Power.Focus();
-            }
-            #endregion
-        }
-
-        private void DirectionActivibility_Click(object sender, EventArgs e)
-        {
-            Direction.Focus();
-        }
-
-        private void PowerActivibility_Click(object sender, EventArgs e)
-        {
-            #region Power.Focus();
-
-            if (Power.Enabled == false)
-            {
-                Direction.Focus();
-            }
-            else
-            {
-                Power.Focus();
-            }
-
-            #endregion
-        }
-
-        private void AutoActivibility_Click(object sender, EventArgs e)
-        {
-            AutoBrake.Focus();
-        }
-
-        private void IndeActivibility_Click(object sender, EventArgs e)
-        {
-            IndeBrake.Focus();
-        }
-
-        #endregion
-
         private void EBrake_Click(object sender, EventArgs e)
         {
+            #region Emergency Brake Procedures
+
             if (EBrakeStatus == false)
             {
                 AutoBrake.Value = IndeBrake.Value = 2;
+                Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect();
+                Application.DoEvents();
                 Power.Value = 0;
                 AutoBrake_Scroll(sender, e);
                 IndeBrake_Scroll(sender, e);
@@ -808,11 +860,14 @@ namespace ArduinoLocomotiveController
                 Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = false;
                 EBrake.Image = Resources.EB_Reset;
                 EBrakeStatus = true;
+                Application.DoEvents();
                 Thread.Sleep(100);
             }
             else if (EBrakeStatus == true)
             {
                 AutoBrake.Value = IndeBrake.Value = 0;
+                Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect();
+                Application.DoEvents();
                 AutoBrake_Scroll(sender, e);
                 IndeBrake_Scroll(sender, e);
                 PowerNum.Font = DigitalFont;
@@ -821,18 +876,37 @@ namespace ArduinoLocomotiveController
                 EBrake.Image = Resources.EB_Applied;
                 EBrakeStatus = false;
             }
+
+            #endregion
         }
 
         private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)
         {
-            AutoBrake.Value = 0;
-            IndeBrake.Value = 0;
+            AutoBrake.Value = 0;    //Stop Flash Thread
+            IndeBrake.Value = 0;    //Stop Flash Thread
         }
 
         #region serialPort Connect & Disconnect & Connection Verification
 
         private void LinkStart_Click(object sender, EventArgs e)
         {
+            if (LinkStart.Text == "Rescan Device")
+            {
+                PortList.Items.Clear();
+                PortList.Items.AddRange(SerialPort.GetPortNames());
+                if (PortList.Items.Count != 0)
+                {
+                    LinkStart.Text = "Connect";
+                    MessageBox.Show("Device Detected ! Ready for Connection.");
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Device Not Detected, Please Try Again !");
+                    return;
+                }
+            }
+
             try
             {
                 if (serialPort.IsOpen)
@@ -863,25 +937,29 @@ namespace ArduinoLocomotiveController
                 BaudList.Enabled = true;
             }
 
-            string CV = serialPort.ReadExisting();
-            if (CV.Contains("PING"))
+            if (serialPort.IsOpen)
             {
-                ThreadStart threadStart = new ThreadStart(ConnectionVerified);
-                Thread CVThread = new Thread(threadStart);
-                CVThread.Start();
-            }
-            else
-            {
-                serialPort.Close();
-                PortList.Items.Clear();
-                PortList.Items.AddRange(SerialPort.GetPortNames());
-                LinkStart.Text = "Connect";
-                PortList.Enabled = true;
-                BaudList.Enabled = true;
+                serialPort.WriteLine("ASKPING");
+                string CV = serialPort.ReadLine();
+                if (CV.Contains("PING"))
+                {
+                    ThreadStart threadStart = new ThreadStart(ConnectionVerified);
+                    Thread CVThread = new Thread(threadStart);
+                    CVThread.Start();
+                }
+                else
+                {
+                    serialPort.Close();
+                    PortList.Items.Clear();
+                    PortList.Items.AddRange(SerialPort.GetPortNames());
+                    LinkStart.Text = "Connect";
+                    MessageBox.Show("Connection Failed !");
+                    PortList.Enabled = true;
+                    BaudList.Enabled = true;
+                }
             }
         }
 
         #endregion
-
     }
 }
