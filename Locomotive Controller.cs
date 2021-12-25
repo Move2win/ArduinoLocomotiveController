@@ -412,7 +412,7 @@ namespace ArduinoLocomotiveController
 
         #region AIC Protocal & Visual Effect (TODO: Sent message to Arduino)
 
-        public void Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect()
+        public void AutoBrake_and_IndeBrake_Collaborative_Protocol_and_Visual_Effect()
         {
             int IndeOutput;
             if (AutoBrake.Value > IndeBrake.Value)
@@ -732,7 +732,11 @@ namespace ArduinoLocomotiveController
 
         private void AutoBrake_Scroll(object sender, EventArgs e)
         {
-            Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect();
+            #region Call AIC
+
+            AutoBrake_and_IndeBrake_Collaborative_Protocol_and_Visual_Effect();
+
+            #endregion
 
             #region BrakeLevel Indicator
 
@@ -784,7 +788,11 @@ namespace ArduinoLocomotiveController
 
         private void IndeBrake_Scroll(object sender, EventArgs e)
         {
-            Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect();
+            #region Call AIC
+
+            AutoBrake_and_IndeBrake_Collaborative_Protocol_and_Visual_Effect();
+
+            #endregion
 
             #region BrakeLevel Indicator
 
@@ -847,7 +855,7 @@ namespace ArduinoLocomotiveController
             if (EBrakeStatus == false)
             {
                 AutoBrake.Value = IndeBrake.Value = 2;
-                Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect();
+                AutoBrake_and_IndeBrake_Collaborative_Protocol_and_Visual_Effect();
                 Application.DoEvents();
                 Power.Value = 0;
                 AutoBrake_Scroll(sender, e);
@@ -866,7 +874,7 @@ namespace ArduinoLocomotiveController
             else if (EBrakeStatus == true)
             {
                 AutoBrake.Value = IndeBrake.Value = 0;
-                Auto_and_Inde_Brake_Collaborative_Protocol_and_Visual_Effect();
+                AutoBrake_and_IndeBrake_Collaborative_Protocol_and_Visual_Effect();
                 Application.DoEvents();
                 AutoBrake_Scroll(sender, e);
                 IndeBrake_Scroll(sender, e);
