@@ -86,18 +86,18 @@ namespace ArduinoLocomotiveController
         private void ControlPanel_Shown(object sender, EventArgs e)
         {
             DirectionActivibility.ForeColor = Color.Black;
-            PortList.Enabled = BaudList.Enabled = LinkStart.Enabled = EBrake.Enabled  = Power.Enabled = false;
-            Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = false;
+            PortList.Enabled = BaudList.Enabled = LinkStart.Enabled = EBrake.Enabled = Power.Enabled = false;
+            Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = PanUP.Enabled = PanDOWN.Enabled = BreakerON.Enabled = BreakerOFF.Enabled = false;            
             Application.DoEvents();
             //
-            //111
+            // 111
             //
             Thread.Sleep(500);
             Direction.BackColor = Color.DarkOrange;
             PowerNum.Text = "1";
             Application.DoEvents();
             //
-            //222
+            // 222
             //
             Thread.Sleep(250);
             Direction.BackColor = SystemColors.Control;
@@ -105,35 +105,31 @@ namespace ArduinoLocomotiveController
             PowerNum.Text = "2";
             Application.DoEvents();
             //
-            //333
+            // 333
             //
             Thread.Sleep(250);
             Power.BackColor = SystemColors.Control;
-            //AutoBrake.BackColor = Color.Red;
             AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = Color.Red;
             PowerNum.Text = "3";
             Application.DoEvents();
             //
-            //444
+            // 444
             //
             Thread.Sleep(250);
-            //AutoBrake.BackColor = SystemColors.Control;
-            //IndeBrake.BackColor = Color.DarkMagenta;
             AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = SystemColors.Control;
             IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = Color.DarkMagenta;
             PowerNum.Text = "4";
             Application.DoEvents();
             //
-            //555
+            // 555
             //
             Thread.Sleep(250);
-            //IndeBrake.BackColor = SystemColors.Control;
             Direction.BackColor = Color.DarkOrange;
             IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
             PowerNum.Text = "5";
             Application.DoEvents();
             //
-            //666
+            // 666
             //
             Thread.Sleep(250);
             Direction.BackColor = SystemColors.Control;
@@ -141,51 +137,43 @@ namespace ArduinoLocomotiveController
             PowerNum.Text = "6";
             Application.DoEvents();
             //
-            //777
+            // 777
             //
             Thread.Sleep(250);
             Power.BackColor = SystemColors.Control;
-            //AutoBrake.BackColor = Color.Red;
             AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = Color.Red;
             PowerNum.Text = "7";
             Application.DoEvents();
             //
-            //888
+            // 888
             //
             Thread.Sleep(250);
-            //AutoBrake.BackColor = SystemColors.Control;
-            //IndeBrake.BackColor = Color.DarkMagenta;
             AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = SystemColors.Control;
             IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = Color.DarkMagenta;
             PowerNum.Text = "8";
             Application.DoEvents();
             //
-            //Clean Up
+            // Clean Up
             //
             Thread.Sleep(250);
-            //IndeBrake.BackColor = SystemColors.Control;
             IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
             Application.DoEvents();
             //
-            //Flash Show
+            // Flash Show
             //
             Thread.Sleep(250);
             Direction.BackColor = Color.DarkOrange;
             Power.BackColor = Color.OliveDrab;
-            //AutoBrake.BackColor = Color.Red;
-            //IndeBrake.BackColor = Color.DarkMagenta;
             AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = Color.Red;
             IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = Color.DarkMagenta;
             PowerNum.Text = "";
             Application.DoEvents();
             //
-            //Flash Hide
+            // Flash Hide
             //
             Thread.Sleep(500);
             Direction.BackColor = SystemColors.Control;
             Power.BackColor = SystemColors.Control;
-            //AutoBrake.BackColor = SystemColors.Control;
-            //IndeBrake.BackColor = SystemColors.Control;
             AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = SystemColors.Control;
             IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
             PowerNum.Text = "8";
@@ -194,7 +182,7 @@ namespace ArduinoLocomotiveController
             DirectionLock.Visible = false;
             Application.DoEvents();
             //
-            //SCC
+            // SCC
             //
             SCing_Hide();
             Application.DoEvents();
@@ -207,8 +195,8 @@ namespace ArduinoLocomotiveController
             PowerLock.Visible = true;
             Power.Enabled = false;
             Application.DoEvents();
-            PortList.Enabled = BaudList.Enabled = LinkStart.Enabled = EBrake.Enabled = true;
-            Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = true;
+            PortList.Enabled = BaudList.Enabled = LinkStart.Enabled = EBrake.Enabled = Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = PanUP.Enabled = PanDOWN.Enabled = BreakerON.Enabled = BreakerOFF.Enabled = true;
+            Direction.Focus();
         }
 
         private void SCing_Hide()
@@ -406,6 +394,7 @@ namespace ArduinoLocomotiveController
                 LblInde.ForeColor = Color.Black;
                 Thread.Sleep(500);
             }
+            //Thread.Sleep(100);
         }
 
         #endregion
@@ -868,8 +857,8 @@ namespace ArduinoLocomotiveController
                 Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = false;
                 EBrake.Image = Resources.EB_Reset;
                 EBrakeStatus = true;
-                Application.DoEvents();
                 Thread.Sleep(100);
+                Application.DoEvents();
             }
             else if (EBrakeStatus == true)
             {
@@ -883,6 +872,8 @@ namespace ArduinoLocomotiveController
                 Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = true;
                 EBrake.Image = Resources.EB_Applied;
                 EBrakeStatus = false;
+                Thread.Sleep(100);
+                Application.DoEvents();
             }
 
             #endregion
@@ -890,11 +881,13 @@ namespace ArduinoLocomotiveController
 
         private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)
         {
+            SafetyDisconnect();
             AutoBrake.Value = 0;    //Stop Flash Thread
             IndeBrake.Value = 0;    //Stop Flash Thread
+            Application.DoEvents();
         }
 
-        #region serialPort Connect & Disconnect & Connection Verification
+        #region serialPort Connect & Disconnect & Connection Verification & Safety Disconnect
 
         private void LinkStart_Click(object sender, EventArgs e)
         {
@@ -919,6 +912,7 @@ namespace ArduinoLocomotiveController
             {
                 if (serialPort.IsOpen)
                 {
+                    SafetyDisconnect();
                     serialPort.Close();
                     LinkStart.Text = "Connect";
                     PortList.Enabled = true;
@@ -966,6 +960,13 @@ namespace ArduinoLocomotiveController
                     BaudList.Enabled = true;
                 }
             }
+        }
+
+        public void SafetyDisconnect()
+        {
+            ////
+            ////Safety Disconnect Procedure
+            ////
         }
 
         #endregion
