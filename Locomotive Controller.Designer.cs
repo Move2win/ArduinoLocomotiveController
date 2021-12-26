@@ -32,6 +32,7 @@ namespace ArduinoLocomotiveController
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlPanel));
             this.PowerBox = new System.Windows.Forms.GroupBox();
+            this.PowerActivibility = new System.Windows.Forms.Label();
             this.DirectionLock = new System.Windows.Forms.Label();
             this.PowerLock = new System.Windows.Forms.Label();
             this.B1 = new System.Windows.Forms.Panel();
@@ -58,7 +59,6 @@ namespace ArduinoLocomotiveController
             this.Direction = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.Power = new ArduinoLocomotiveController.TrackBarNoBorder();
             this.DirectionActivibility = new System.Windows.Forms.Label();
-            this.PowerActivibility = new System.Windows.Forms.Label();
             this.BrakeBox = new System.Windows.Forms.GroupBox();
             this.IndeApp = new System.Windows.Forms.Label();
             this.AutoApp = new System.Windows.Forms.Label();
@@ -94,17 +94,23 @@ namespace ArduinoLocomotiveController
             this.LblCE = new System.Windows.Forms.Label();
             this.EBrake = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.PanDOWN = new System.Windows.Forms.Button();
             this.PanUP = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.BreakerOFF = new System.Windows.Forms.Button();
+            this.BreakerON = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.BreakerOFF = new System.Windows.Forms.Button();
-            this.BreakerON = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.PowerBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Direction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Power)).BeginInit();
@@ -114,6 +120,8 @@ namespace ArduinoLocomotiveController
             ((System.ComponentModel.ISupportInitialize)(this.EBrake)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // PowerBox
@@ -153,6 +161,19 @@ namespace ArduinoLocomotiveController
             this.PowerBox.TabIndex = 4;
             this.PowerBox.TabStop = false;
             this.PowerBox.Text = "Power Combined";
+            // 
+            // PowerActivibility
+            // 
+            this.PowerActivibility.AutoSize = true;
+            this.PowerActivibility.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.PowerActivibility.Font = new System.Drawing.Font("等线", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.PowerActivibility.Location = new System.Drawing.Point(277, 420);
+            this.PowerActivibility.Name = "PowerActivibility";
+            this.PowerActivibility.Size = new System.Drawing.Size(66, 22);
+            this.PowerActivibility.TabIndex = 1;
+            this.PowerActivibility.Text = "Active";
+            this.PowerActivibility.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.PowerActivibility.Click += new System.EventHandler(this.PowerActivibility_Click);
             // 
             // DirectionLock
             // 
@@ -454,19 +475,6 @@ namespace ArduinoLocomotiveController
             this.DirectionActivibility.Text = "Active";
             this.DirectionActivibility.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DirectionActivibility.Click += new System.EventHandler(this.DirectionActivibility_Click);
-            // 
-            // PowerActivibility
-            // 
-            this.PowerActivibility.AutoSize = true;
-            this.PowerActivibility.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.PowerActivibility.Font = new System.Drawing.Font("等线", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.PowerActivibility.Location = new System.Drawing.Point(277, 420);
-            this.PowerActivibility.Name = "PowerActivibility";
-            this.PowerActivibility.Size = new System.Drawing.Size(66, 22);
-            this.PowerActivibility.TabIndex = 1;
-            this.PowerActivibility.Text = "Active";
-            this.PowerActivibility.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.PowerActivibility.Click += new System.EventHandler(this.PowerActivibility_Click);
             // 
             // BrakeBox
             // 
@@ -900,6 +908,20 @@ namespace ArduinoLocomotiveController
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pantograph";
             // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Blue;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 24);
+            this.label1.Margin = new System.Windows.Forms.Padding(4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(118, 35);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "DOWN";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // PanDOWN
             // 
             this.PanDOWN.Location = new System.Drawing.Point(6, 110);
@@ -934,60 +956,6 @@ namespace ArduinoLocomotiveController
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Main Breaker";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(312, 24);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(324, 158);
-            this.groupBox3.TabIndex = 21;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Current Signal";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Location = new System.Drawing.Point(648, 24);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(6);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(324, 158);
-            this.groupBox4.TabIndex = 22;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Next Signal";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Location = new System.Drawing.Point(984, 24);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(6);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(130, 158);
-            this.groupBox5.TabIndex = 23;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Reverser";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Location = new System.Drawing.Point(1126, 24);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(6);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(130, 158);
-            this.groupBox6.TabIndex = 24;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Warnings";
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Blue;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Font = new System.Drawing.Font("等线", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(6, 24);
-            this.label1.Margin = new System.Windows.Forms.Padding(4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 35);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "DOWN";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -1024,6 +992,136 @@ namespace ArduinoLocomotiveController
             this.BreakerON.TabStop = false;
             this.BreakerON.Text = "CLOSE UP";
             this.BreakerON.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Location = new System.Drawing.Point(312, 24);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(324, 158);
+            this.groupBox3.TabIndex = 21;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Main Signal";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Location = new System.Drawing.Point(648, 24);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(324, 158);
+            this.groupBox4.TabIndex = 22;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Distant Signal";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Location = new System.Drawing.Point(984, 24);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(130, 158);
+            this.groupBox5.TabIndex = 23;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Switch";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Controls.Add(this.label7);
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Location = new System.Drawing.Point(1126, 24);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(130, 158);
+            this.groupBox6.TabIndex = 24;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Warnings";
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label3.Font = new System.Drawing.Font("Arial", 90F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(9, 20);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.label3.Size = new System.Drawing.Size(112, 125);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "X";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.MediumOrchid;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label4.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.ForeColor = System.Drawing.Color.Ivory;
+            this.label4.Location = new System.Drawing.Point(12, 22);
+            this.label4.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 24);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Battery Low";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.DarkOrange;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.ForeColor = System.Drawing.Color.Ivory;
+            this.label5.Location = new System.Drawing.Point(12, 47);
+            this.label5.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(106, 24);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Pantograph";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Red;
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label6.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.ForeColor = System.Drawing.Color.Ivory;
+            this.label6.Location = new System.Drawing.Point(12, 72);
+            this.label6.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 24);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Force Stop";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Olive;
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label7.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.ForeColor = System.Drawing.Color.Ivory;
+            this.label7.Location = new System.Drawing.Point(12, 97);
+            this.label7.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(106, 24);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Step Lost";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.DarkCyan;
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label8.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.ForeColor = System.Drawing.Color.Ivory;
+            this.label8.Location = new System.Drawing.Point(12, 122);
+            this.label8.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(106, 24);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Signal Lost";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ControlPanel
             // 
@@ -1070,6 +1168,8 @@ namespace ArduinoLocomotiveController
             ((System.ComponentModel.ISupportInitialize)(this.EBrake)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1150,6 +1250,12 @@ namespace ArduinoLocomotiveController
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BreakerOFF;
         private System.Windows.Forms.Button BreakerON;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }
 
