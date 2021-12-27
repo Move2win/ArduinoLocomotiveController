@@ -176,6 +176,7 @@ namespace ArduinoLocomotiveController
             Power.BackColor = SystemColors.Control;
             AHL.BackColor = AHR.BackColor = AFL.BackColor = AFR.BackColor = SystemColors.Control;
             IHL.BackColor = IHR.BackColor = IFL.BackColor = IFR.BackColor = SystemColors.Control;
+            label4.BackColor = label5.BackColor = label6.BackColor = label7.BackColor = label8.BackColor = Color.Gainsboro;
             PowerNum.Text = "8";
             AutoApp.Visible = IndeApp.Visible = false;
             PowerLock.Visible = false;
