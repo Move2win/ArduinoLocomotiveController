@@ -1,0 +1,82 @@
+This document list all parameters with names and uses that might passing between the commander Arduino (aka Arduino board A) and desktop controller.
+
+Receive: Arduino >>> Desktop
+
+    PING （TODO, important, connection verification）
+    PANTOGRAPHUNSTABLE (TODO, pantograph connection not stable)
+    BATTERYLOW (TODO, internal battery running low)
+
+Send: Desktop >>> Arduino
+
+    Connection Verification
+        ASKPING (important, connection verification)
+
+    Pantograph State
+        RAISING (TODO, raise up the pantograph)
+        LOWERING (TODO, low down the pantograph)
+
+    Trivial Directions
+        FORWARD (TODO, move ahead)
+        NEUTRAL (TODO, halt)
+        REVERSE (TODO, move back)
+    
+    Power-Brake Levels
+        P5 (TODO, power maximum)
+        P4 (TODO, power 4)
+        P3 (TODO, power 3)
+        P2 (TODO, power 2)
+        P1 (TODO, power minimum)
+        IDLE (TODO, no power)
+        B1 (TODO, brake minimum)
+        B2 (TODO, brake 1)
+        B3 (TODO, brake 2)
+        B4 (TODO, brake 3)
+        B5 (TODO, brake maximum)
+    
+    AutoBrake Levels
+        AUTORELEASE (TODO, no autobrake)
+        AUTOHALF (TODO, half autobrake)
+        AUTOFULL (TODO, full autobrake)
+    
+    IndeBrake Levels
+        INDERELEASE (TODO, no independentbrake)
+        INDEHALF (TODO, half independentbrake)
+        INDEFULL (TODO, full independentbrake)
+
+    Emergency Brake Procedures
+        STOPNOW (TODO, perform emergency brake)
+        RESET (TODO, recover from emergency brake)
+
+
+       _                                        _                          _
+     _(_)_                                     (_)                        (_)
+   _(_) (_)_       _       _  _        _  _  _ (_)    _         _       _  _           _  _  _  _          _  _  _
+ _(_)     (_)_    (_)_  _ (_)(_)     _(_)(_)(_)(_)   (_)       (_)     (_)(_)         (_)(_)(_)(_)_     _ (_)(_)(_) _
+(_) _  _  _ (_)     (_)(_)          (_)        (_)   (_)       (_)        (_)         (_)        (_)   (_)         (_)
+(_)(_)(_)(_)(_)     (_)             (_)        (_)   (_)       (_)        (_)         (_)        (_)   (_)         (_)
+(_)         (_)     (_)             (_)_  _  _ (_)   (_)_  _  _(_)_     _ (_) _       (_)        (_)   (_) _  _  _ (_)
+(_)         (_)     (_)               (_)(_)(_)(_)     (_)(_)(_) (_)   (_)(_)(_)      (_)        (_)      (_)(_)(_)
+
+
+ _                                                                                                             _                _
+(_)                                                                                                           (_)              (_)
+(_)                   _  _  _          _  _  _           _  _  _         _  _   _  _         _  _  _        _ (_) _  _       _  _       _               _      _  _  _  _
+(_)                _ (_)(_)(_) _     _(_)(_)(_)       _ (_)(_)(_) _     (_)(_)_(_)(_)     _ (_)(_)(_) _    (_)(_)(_)(_)     (_)(_)     (_)_           _(_)    (_)(_)(_)(_)_
+(_)               (_)         (_)   (_)              (_)         (_)   (_)   (_)   (_)   (_)         (_)      (_)              (_)       (_)_       _(_)     (_) _  _  _ (_)
+(_)               (_)         (_)   (_)              (_)         (_)   (_)   (_)   (_)   (_)         (_)      (_)     _        (_)         (_)_   _(_)       (_)(_)(_)(_)(_)
+(_) _  _  _  _    (_) _  _  _ (_)   (_)_  _  _       (_) _  _  _ (_)   (_)   (_)   (_)   (_) _  _  _ (_)      (_)_  _(_)     _ (_) _         (_)_(_)         (_)_  _  _  _
+(_)(_)(_)(_)(_)      (_)(_)(_)        (_)(_)(_)         (_)(_)(_)      (_)   (_)   (_)      (_)(_)(_)           (_)(_)      (_)(_)(_)          (_)             (_)(_)(_)(_)
+
+
+
+    _  _  _                                              _                                                 _  _           _  _
+ _ (_)(_)(_) _                                          (_)                                               (_)(_)         (_)(_)
+(_)         (_)       _  _  _        _  _  _  _       _ (_) _  _       _       _  _         _  _  _          (_)            (_)           _  _  _  _       _       _  _
+(_)                _ (_)(_)(_) _    (_)(_)(_)(_)_    (_)(_)(_)(_)     (_)_  _ (_)(_)     _ (_)(_)(_) _       (_)            (_)          (_)(_)(_)(_)_    (_)_  _ (_)(_)
+(_)               (_)         (_)   (_)        (_)      (_)             (_)(_)          (_)         (_)      (_)            (_)         (_) _  _  _ (_)     (_)(_)
+(_)          _    (_)         (_)   (_)        (_)      (_)     _       (_)             (_)         (_)      (_)            (_)         (_)(_)(_)(_)(_)     (_)
+(_) _  _  _ (_)   (_) _  _  _ (_)   (_)        (_)      (_)_  _(_)      (_)             (_) _  _  _ (_)    _ (_) _        _ (_) _       (_)_  _  _  _       (_)
+   (_)(_)(_)         (_)(_)(_)      (_)        (_)        (_)(_)        (_)                (_)(_)(_)      (_)(_)(_)      (_)(_)(_)        (_)(_)(_)(_)      (_)
+
+
+by dotmatrix
