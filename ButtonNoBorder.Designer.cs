@@ -1,6 +1,7 @@
-﻿namespace ArduinoLocomotiveController
+﻿
+namespace ArduinoLocomotiveController
 {
-    partial class TrackBarNoBorder
+    partial class ButtonNoBorder
     {
         /// <summary> 
         /// 必需的设计器变量。

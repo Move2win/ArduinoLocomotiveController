@@ -87,7 +87,7 @@ namespace ArduinoLocomotiveController
         {
             DirectionActivibility.ForeColor = Color.Black;
             PortList.Enabled = BaudList.Enabled = LinkStart.Enabled = EBrake.Enabled = Power.Enabled = false;
-            Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = PanUP.Enabled = PanDOWN.Enabled = BreakerON.Enabled = BreakerOFF.Enabled = false;            
+            Direction.Enabled = AutoBrake.Enabled = IndeBrake.Enabled = PanUP.Enabled = PanDOWN.Enabled = BreakerON.Enabled = BreakerOFF.Enabled = false;
             Application.DoEvents();
             //
             // 111
@@ -370,23 +370,7 @@ namespace ArduinoLocomotiveController
 
         public void BrakeFlash()
         {
-            while (AutoBrake.Value != 0 & IndeBrake.Value == 0)
-            {
-                LblAuto.ForeColor = Color.Red;
-                Thread.Sleep(500);
-                LblAuto.ForeColor = Color.Black;
-                Thread.Sleep(500);
-            }
-
-            while (AutoBrake.Value == 0 & IndeBrake.Value != 0)
-            {
-                LblInde.ForeColor = Color.Red;
-                Thread.Sleep(500);
-                LblInde.ForeColor = Color.Black;
-                Thread.Sleep(500);
-            }
-
-            while (AutoBrake.Value != 0 & IndeBrake.Value != 0)
+            while (AutoBrake.Value != 0 && IndeBrake.Value != 0)
             {
                 LblAuto.ForeColor = Color.Red;
                 LblInde.ForeColor = Color.Red;
@@ -395,7 +379,21 @@ namespace ArduinoLocomotiveController
                 LblInde.ForeColor = Color.Black;
                 Thread.Sleep(500);
             }
-            //Thread.Sleep(100);
+            while (IndeBrake.Value == 0 && AutoBrake.Value != 0)
+            {
+                LblAuto.ForeColor = Color.Red;
+                Thread.Sleep(500);
+                LblAuto.ForeColor = Color.Black;
+                Thread.Sleep(500);
+            }
+
+            while (AutoBrake.Value == 0 && IndeBrake.Value != 0)
+            {
+                LblInde.ForeColor = Color.Red;
+                Thread.Sleep(500);
+                LblInde.ForeColor = Color.Black;
+                Thread.Sleep(500);
+            }
         }
 
         #endregion
@@ -531,87 +529,71 @@ namespace ArduinoLocomotiveController
 
             switch (Power.Value)
             {
+                case 8:
+                    P8.Show();
+                    break;
+                case 7:
+                    P7.Show();
+                    P8.Hide();
+                    break;
+                case 6:
+                    P6.Show();
+                    P7.Hide();
+                    break;
                 case 5:
-                    P1.Show();
-                    P2.Show();
-                    P3.Show();
-                    P4.Show();
                     P5.Show();
+                    P6.Hide();
                     break;
                 case 4:
-                    P1.Show();
-                    P2.Show();
-                    P3.Show();
                     P4.Show();
                     P5.Hide();
                     break;
                 case 3:
-                    P1.Show();
-                    P2.Show();
                     P3.Show();
                     P4.Hide();
-                    P5.Hide();
                     break;
                 case 2:
-                    P1.Show();
                     P2.Show();
                     P3.Hide();
-                    P4.Hide();
-                    P5.Hide();
                     break;
                 case 1:
                     P1.Show();
                     P2.Hide();
-                    P3.Hide();
-                    P4.Hide();
-                    P5.Hide();
                     break;
                 case 0:
                     P1.Hide();
-                    P2.Hide();
-                    P3.Hide();
-                    P4.Hide();
-                    P5.Hide();
                     B1.Hide();
-                    B2.Hide();
-                    B3.Hide();
-                    B4.Hide();
-                    B5.Hide();
                     break;
                 case -1:
                     B1.Show();
                     B2.Hide();
-                    B3.Hide();
-                    B4.Hide();
-                    B5.Hide();
                     break;
                 case -2:
-                    B1.Show();
                     B2.Show();
                     B3.Hide();
-                    B4.Hide();
-                    B5.Hide();
                     break;
                 case -3:
-                    B1.Show();
-                    B2.Show();
                     B3.Show();
                     B4.Hide();
-                    B5.Hide();
                     break;
                 case -4:
-                    B1.Show();
-                    B2.Show();
-                    B3.Show();
                     B4.Show();
                     B5.Hide();
                     break;
                 case -5:
-                    B1.Show();
-                    B2.Show();
-                    B3.Show();
-                    B4.Show();
                     B5.Show();
+                    B6.Hide();
+                    break;
+                case -6:
+                    B6.Show();
+                    B7.Hide();
+                    break;
+                case -7:
+                    B7.Show();
+                    B8.Hide();
+                    break;
+                case -8:
+                    B8.Show();
                     break;
             }
 
@@ -619,7 +601,7 @@ namespace ArduinoLocomotiveController
 
             #region pBar Label Color Change
 
-            if (Power.Value == 5)
+            if (Power.Value == 8)
             {
                 FULLTHROTTLE.BackColor = Color.Red;
                 FULLTHROTTLE.ForeColor = Color.LimeGreen;
@@ -627,7 +609,7 @@ namespace ArduinoLocomotiveController
                 DYNAMICBRAKE.BackColor = SystemColors.ControlLight;
                 DYNAMICBRAKE.ForeColor = Color.Black;
             }
-            else if (Power.Value > 0 & Power.Value < 5)
+            else if (Power.Value > 0 & Power.Value < 8)
             {
                 FULLTHROTTLE.BackColor = SystemColors.ControlLight;
                 FULLTHROTTLE.ForeColor = Color.LimeGreen;
@@ -643,7 +625,7 @@ namespace ArduinoLocomotiveController
                 DYNAMICBRAKE.BackColor = SystemColors.ControlLight;
                 DYNAMICBRAKE.ForeColor = Color.Black;
             }
-            else if (Power.Value < 0 & Power.Value > -5)
+            else if (Power.Value < 0 & Power.Value > -8)
             {
                 FULLTHROTTLE.BackColor = SystemColors.ControlLight;
                 FULLTHROTTLE.ForeColor = Color.Black;
@@ -651,7 +633,7 @@ namespace ArduinoLocomotiveController
                 DYNAMICBRAKE.BackColor = SystemColors.ControlLight;
                 DYNAMICBRAKE.ForeColor = Color.DarkOrange;
             }
-            else if (Power.Value == -5)
+            else if (Power.Value == -8)
             {
                 FULLTHROTTLE.BackColor = SystemColors.ControlLight;
                 FULLTHROTTLE.ForeColor = Color.Black;
@@ -690,32 +672,7 @@ namespace ArduinoLocomotiveController
 
             #region pNum Display
 
-            switch (Power.Value)
-            {
-                case 0:
-                    PowerNum.Text = "0";
-                    break;
-                case 1:
-                case -1:
-                    PowerNum.Text = "1";
-                    break;
-                case 2:
-                case -2:
-                    PowerNum.Text = "2";
-                    break;
-                case 3:
-                case -3:
-                    PowerNum.Text = "3";
-                    break;
-                case 4:
-                case -4:
-                    PowerNum.Text = "4";
-                    break;
-                case 5:
-                case -5:
-                    PowerNum.Text = "5";
-                    break;
-            }
+            PowerNum.Text = Convert.ToString(System.Math.Abs(Power.Value));
 
             #endregion
         }
@@ -848,6 +805,10 @@ namespace ArduinoLocomotiveController
                 AutoBrake_and_IndeBrake_Collaborative_Protocol_and_Visual_Effect();
                 Application.DoEvents();
                 Power.Value = 0;
+                P1.Visible = P2.Visible = P3.Visible = P4.Visible = P5.Visible = P6.Visible = P7.Visible = P8.Visible = B1.Visible = B2.Visible = B3.Visible = B4.Visible = B5.Visible = B6.Visible = B7.Visible = B8.Visible = false;
+                //
+                // Need Optimize
+                //
                 AutoBrake_Scroll(sender, e);
                 IndeBrake_Scroll(sender, e);
                 Direction.Value = 0;
@@ -888,7 +849,7 @@ namespace ArduinoLocomotiveController
             Application.DoEvents();
         }
 
-        #region serialPort Connect & Disconnect & Connection Verification & Safety Disconnect
+        #region serialPort Connect & Disconnect & Connection Verification & Safety Disconnect(TODO)
 
         private void LinkStart_Click(object sender, EventArgs e)
         {
@@ -971,5 +932,36 @@ namespace ArduinoLocomotiveController
         }
 
         #endregion
+
+        private void EOTD_Click(object sender, EventArgs e)
+        {
+            #region EOTD Emergency (TODO: EOTD code)
+
+            if (EOTD.BackColor == Color.WhiteSmoke && EBrakeStatus == false)
+            {
+                EBrake_Click(sender, e);
+                Application.DoEvents();
+                // TODO
+                // Put EOTD code here
+                EBrake.Enabled = false;
+                EOTD.BackColor = Color.Red;
+            }
+            else if (EOTD.BackColor == Color.WhiteSmoke && EBrakeStatus == true)
+            {
+                // TODO
+                // Put EOTD code here
+                EBrake.Enabled = false;
+                EOTD.BackColor = Color.Red;
+            }
+            else
+            {
+                EBrake_Click(sender, e);
+                Application.DoEvents();
+                EBrake.Enabled = true;
+                EOTD.BackColor = Color.WhiteSmoke;
+            }
+
+            #endregion
+        }
     }
 }

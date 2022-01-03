@@ -85,6 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ButtonNoBorder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ButtonNoBorder.Designer.cs">
+      <DependentUpon>ButtonNoBorder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Locomotive Controller.cs">
       <SubType>Form</SubType>
     </Compile>
